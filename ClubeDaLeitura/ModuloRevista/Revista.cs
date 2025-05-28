@@ -11,7 +11,7 @@ namespace ClubeDaLeitura.ModuloRevista
         public string status = "Disponível";
         public Caixa caixa;
 
-        public string Validacao()
+        public override string Validacao()
         {
             string erros = "";
 

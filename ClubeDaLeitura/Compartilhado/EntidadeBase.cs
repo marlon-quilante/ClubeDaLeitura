@@ -1,6 +1,6 @@
 ﻿namespace ClubeDaLeitura.Compartilhado
 {
-    public class EntidadeBase
+    public abstract class EntidadeBase
     {
         public int id;
 
@@ -12,5 +12,7 @@
 
             return true;
         }
+
+        public abstract string Validacao();
     }
 }

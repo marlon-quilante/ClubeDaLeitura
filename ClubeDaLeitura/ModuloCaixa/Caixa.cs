@@ -8,7 +8,7 @@ namespace ClubeDaLeitura.ModuloCaixa
         public string cor;
         public int diasEmprestimo = 7;
 
-        public string Validacao()
+        public override string Validacao()
         {
             string erros = "";
 

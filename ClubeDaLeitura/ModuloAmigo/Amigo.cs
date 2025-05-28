@@ -8,7 +8,7 @@ namespace ClubeDaLeitura.ModuloAmigo
         public string nomeResponsavel;
         public string telefone;
 
-        public string Validacao()
+        public override string Validacao()
         {
             string erros = "";
 
