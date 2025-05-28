@@ -12,9 +12,9 @@ namespace ClubeDaLeitura.ModuloAmigo
         {
             string erros = "";
 
-            if (nome.Length < 2 || string.IsNullOrWhiteSpace(nome))
+            if (nome.Length < 3 || nome.Length > 100 || string.IsNullOrWhiteSpace(nome))
                 erros += "O nome do amigo precisa conter mais de 1 caractere!\n";
-            if (nomeResponsavel.Length < 2 || string.IsNullOrWhiteSpace(nome))
+            if (nomeResponsavel.Length < 3 || nomeResponsavel.Length > 100 || string.IsNullOrWhiteSpace(nome))
                 erros += "O nome do responsável precisa conter mais de 1 caractere!\n";
             if (!TelefoneValido(telefone))
                 erros += "O telefone digitado não é válido!";
