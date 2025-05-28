@@ -4,9 +4,16 @@ namespace ClubeDaLeitura.ModuloAmigo
 {
     public class Amigo : EntidadeBase
     {
-        public string nome;
-        public string nomeResponsavel;
-        public string telefone;
+        protected string nome;
+        protected string nomeResponsavel;
+        protected string telefone;
+
+        public Amigo(string nome, string nomeResponsavel, string telefone)
+        {
+            this.nome = nome;
+            this.nomeResponsavel = nomeResponsavel;
+            this.telefone = telefone;
+        }
 
         public override string Validacao()
         {
