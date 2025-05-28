@@ -13,7 +13,7 @@ namespace ClubeDaLeitura.ModuloCaixa
             string erros = "";
 
             if (etiqueta.Length < 3 || etiqueta.Length > 50 || string.IsNullOrWhiteSpace(etiqueta))
-                erros += "A etiqueta precisa conter de 2 a 50 carateres!\n";
+                erros += "A etiqueta precisa conter de 3 a 50 carateres!\n";
 
             return erros;
         }
