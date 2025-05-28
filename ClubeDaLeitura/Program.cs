@@ -8,7 +8,7 @@ namespace ClubeDaLeitura
         static void Main(string[] args)
         {
             TelaBase telaAmigo = new TelaAmigo();
-            RepositorioBase repositorio = new RepositorioBase();
+            RepositorioBase repositorio = new RepositorioAmigo();
             
             telaAmigo.repositorio = repositorio;
 

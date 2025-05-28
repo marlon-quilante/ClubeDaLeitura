@@ -1,4 +1,6 @@
-﻿namespace ClubeDaLeitura.Compartilhado
+﻿using ClubeDaLeitura.ModuloAmigo;
+
+namespace ClubeDaLeitura.Compartilhado
 {
     public abstract class EntidadeBase
     {
@@ -13,6 +15,8 @@
             return true;
         }
 
-        public abstract string Validacao();
+        public abstract string Validacao(EntidadeBase registro, RepositorioBase repositorio);
+
+        public abstract bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio);
     }
 }

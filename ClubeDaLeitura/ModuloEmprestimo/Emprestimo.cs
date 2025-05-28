@@ -12,9 +12,14 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         public DateTime dataDevolucao;
         public string status;
 
-        public override string Validacao()
+        public override string Validacao(EntidadeBase registro, RepositorioBase repositorio)
         {
             return "";
+        }
+
+        public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
+        {
+            throw new NotImplementedException();
         }
     }
 }

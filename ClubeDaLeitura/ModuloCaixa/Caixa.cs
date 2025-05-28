@@ -8,7 +8,12 @@ namespace ClubeDaLeitura.ModuloCaixa
         public string cor;
         public int diasEmprestimo = 7;
 
-        public override string Validacao()
+        public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string Validacao(EntidadeBase registro, RepositorioBase repositorio)
         {
             string erros = "";
 

@@ -15,7 +15,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             this.telefone = telefone;
         }
 
-        public override string Validacao()
+        public override string Validacao(EntidadeBase registro, RepositorioBase repositorio)
         {
             string erros = "";
 
@@ -24,9 +24,26 @@ namespace ClubeDaLeitura.ModuloAmigo
             if (nomeResponsavel.Length < 3 || nomeResponsavel.Length > 100 || string.IsNullOrWhiteSpace(nome))
                 erros += "O nome do responsável precisa conter de 3 a 100 carateres!\n";
             if (!TelefoneValido(telefone))
-                erros += "O telefone digitado não é válido!";
+                erros += "O telefone digitado não é válido!\n";
+            if (RegistroExiste(registro, repositorio))
+                erros += "O nome ou o telefone já foi cadastrado!\n";
 
             return erros;
+        }
+
+        public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
+        {
+            Amigo registroAmigo = (Amigo)registro;
+            RepositorioAmigo repositorioAmigo = (RepositorioAmigo)repositorio;
+
+            foreach (Amigo amigo in repositorioAmigo.listaRegistros)
+            {
+                if (amigo.nome == registroAmigo.nome || amigo.telefone == registroAmigo.telefone)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

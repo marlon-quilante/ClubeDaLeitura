@@ -11,7 +11,12 @@ namespace ClubeDaLeitura.ModuloRevista
         public string status = "Disponível";
         public Caixa caixa;
 
-        public override string Validacao()
+        public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string Validacao(EntidadeBase registro, RepositorioBase repositorio)
         {
             string erros = "";
 

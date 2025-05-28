@@ -1,6 +1,6 @@
 ﻿namespace ClubeDaLeitura.Compartilhado
 {
-    public class RepositorioBase
+    public abstract class RepositorioBase
     {
         public List<EntidadeBase> listaRegistros = new List<EntidadeBase>();
 
