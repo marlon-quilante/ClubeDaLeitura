@@ -8,6 +8,7 @@ namespace ClubeDaLeitura.ModuloRevista
         public string titulo;
         public int numeroEdicao;
         public DateTime anoPublicacao;
+        public string status = "Disponível";
         public Caixa caixa;
 
         public string Validacao()
