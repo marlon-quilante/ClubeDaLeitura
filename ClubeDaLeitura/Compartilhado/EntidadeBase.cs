@@ -1,6 +1,6 @@
 ﻿namespace ClubeDaLeitura.Compartilhado
 {
-    internal class EntidadeBase
+    public class EntidadeBase
     {
         public int id;
 
