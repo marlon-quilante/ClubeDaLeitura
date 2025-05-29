@@ -21,5 +21,10 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         {
             throw new NotImplementedException();
         }
+
+        public override void Atualizar(EntidadeBase registroAtualizado)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

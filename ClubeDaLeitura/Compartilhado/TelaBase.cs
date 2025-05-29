@@ -57,6 +57,35 @@
 
         public abstract void Visualizar();
 
+        public void Editar()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Edição de {entidade}");
+            Console.WriteLine("------------------------");
+            Console.WriteLine();
+
+            int id = BuscarRegistroPorID();
+            if (repositorio.IDExiste(id))
+            {
+                EntidadeBase registroAtualizado = ObterDados();
+                repositorio.AtualizarRegistro(id, registroAtualizado);
+            }
+            else
+            {
+                Console.WriteLine("ID digitado não existe! Pressione ENTER para tentar novamente...");
+                Console.ReadLine();
+                Editar();
+                return;
+            }
+        }
+
+        private int BuscarRegistroPorID()
+        {
+            Console.Write("Digite o ID: ");
+            return int.Parse(Console.ReadLine());
+        }
+
         protected abstract EntidadeBase ObterDados();
     }
 }

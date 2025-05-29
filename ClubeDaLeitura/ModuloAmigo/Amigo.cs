@@ -45,5 +45,14 @@ namespace ClubeDaLeitura.ModuloAmigo
             }
             return false;
         }
+
+        public override void Atualizar(EntidadeBase registroAtualizado)
+        {
+            Amigo amigoAtualizado = (Amigo)registroAtualizado;
+
+            nome = amigoAtualizado.nome;
+            nomeResponsavel = amigoAtualizado.nomeResponsavel;
+            telefone = amigoAtualizado.telefone;
+        }
     }
 }

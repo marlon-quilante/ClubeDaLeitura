@@ -11,6 +11,11 @@ namespace ClubeDaLeitura.ModuloRevista
         public string status = "Disponível";
         public Caixa caixa;
 
+        public override void Atualizar(EntidadeBase registroAtualizado)
+        {
+            throw new NotImplementedException();
+        }
+
         public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
         {
             throw new NotImplementedException();

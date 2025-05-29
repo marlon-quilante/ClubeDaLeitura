@@ -8,6 +8,11 @@ namespace ClubeDaLeitura.ModuloCaixa
         public string cor;
         public int diasEmprestimo = 7;
 
+        public override void Atualizar(EntidadeBase registroAtualizado)
+        {
+            throw new NotImplementedException();
+        }
+
         public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
         {
             throw new NotImplementedException();
