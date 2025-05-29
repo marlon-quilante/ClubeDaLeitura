@@ -12,7 +12,7 @@
             this.repositorio = repositorio;
         }
 
-        public string OpcaoDoMenu()
+        public int OpcaoDoMenu()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
@@ -25,8 +25,9 @@
             Console.WriteLine("3 - Editar");
             Console.WriteLine("4 - Deletar");
             Console.WriteLine("5 - Visualizar Empréstimos");
+            Console.WriteLine();
 
-            return Console.ReadLine();
+            return int.Parse(Console.ReadLine());
         }
 
         public void Cadastro()

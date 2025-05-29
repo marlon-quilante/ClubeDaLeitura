@@ -4,7 +4,7 @@ using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloEmprestimo
 {
-    internal class Emprestimo : EntidadeBase
+    public class Emprestimo : EntidadeBase
     {
         public Amigo amigo;
         public Revista revista;

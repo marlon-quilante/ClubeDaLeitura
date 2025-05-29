@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClubeDaLeitura.Compartilhado;
 
 namespace ClubeDaLeitura.ModuloRevista
 {
-    internal class RepositorioRevista
-    {
-    }
+    internal class RepositorioRevista : RepositorioBase;
 }

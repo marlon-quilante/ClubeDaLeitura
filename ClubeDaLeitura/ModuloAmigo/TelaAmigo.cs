@@ -2,7 +2,7 @@
 
 namespace ClubeDaLeitura.ModuloAmigo
 {
-    internal class TelaAmigo : TelaBase
+    public class TelaAmigo : TelaBase
     {
         public TelaAmigo() : base("Amigo", new RepositorioAmigo())
         {

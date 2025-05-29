@@ -7,30 +7,32 @@ namespace ClubeDaLeitura
     {
         static void Main(string[] args)
         {
-            TelaBase telaAmigo = new TelaAmigo();
-            RepositorioBase repositorio = new RepositorioAmigo();
             TelaPrincipal telaPrincipal = new TelaPrincipal();
-            
-            telaAmigo.repositorio = repositorio;
 
             while (true)
             {
-                telaPrincipal.MenuPrincipal();
-                string opcaoEscolhida = telaAmigo.OpcaoDoMenu();
+                telaPrincipal.OpcaoDoMenu();
 
-                switch (int.Parse(opcaoEscolhida))
+                TelaBase telaEscolhida = telaPrincipal.EscolherTela();
+
+                if (telaEscolhida == null)
+                    break;
+
+                int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
+
+                switch (opcaoEscolhida)
                 {
                     case 1:
-                        telaAmigo.Cadastro();
+                        telaEscolhida.Cadastro();
                         break;
                     case 2:
-                        telaAmigo.Visualizar();
+                        telaEscolhida.Visualizar();
                         break;
                     case 3:
-                        telaAmigo.Editar();
+                        telaEscolhida.Editar();
                         break;
                     case 4:
-                        telaAmigo.Deletar();
+                        telaEscolhida.Deletar();
                         break;
                     default:
                         break;
