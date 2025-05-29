@@ -4,6 +4,7 @@
     {
         public List<EntidadeBase> listaRegistros = new List<EntidadeBase>();
         public EntidadeBase entidadeBase;
+
         public void CadastrarRegistro(EntidadeBase registro)
         {
             listaRegistros.Add(registro);
@@ -20,6 +21,12 @@
             }
         }
 
+        public void DeletarRegistro(int id)
+        {
+            EntidadeBase registro = BuscarRegistroPorID(id);
+            listaRegistros.Remove(registro);
+        }
+
         public bool IDExiste(int id)
         {
             foreach (EntidadeBase registro in listaRegistros)
@@ -28,6 +35,16 @@
                     return true;
             }
             return false;
+        }
+
+        public EntidadeBase BuscarRegistroPorID(int id)
+        {
+            foreach (EntidadeBase registro in listaRegistros)
+            {
+                if (id == registro.id)
+                    return registro;
+            }
+            return null;
         }
     }
 }

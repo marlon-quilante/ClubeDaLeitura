@@ -65,7 +65,7 @@
             Console.WriteLine("------------------------");
             Console.WriteLine();
 
-            int id = BuscarRegistroPorID();
+            int id = ObterID();
             if (repositorio.IDExiste(id))
             {
                 EntidadeBase registroAtualizado = ObterDados();
@@ -80,7 +80,22 @@
             }
         }
 
-        private int BuscarRegistroPorID()
+        public void Deletar()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Exclusão de {entidade}");
+            Console.WriteLine("------------------------");
+            Console.WriteLine();
+
+            int id = ObterID();
+            if (repositorio.IDExiste(id))
+            {
+                repositorio.DeletarRegistro(id);
+            }
+        }
+
+        private int ObterID()
         {
             Console.Write("Digite o ID: ");
             return int.Parse(Console.ReadLine());

@@ -29,6 +29,9 @@ namespace ClubeDaLeitura
                     case 3:
                         telaAmigo.Editar();
                         break;
+                    case 4:
+                        telaAmigo.Deletar();
+                        break;
                     default:
                         break;
                 }
