@@ -4,9 +4,9 @@ namespace ClubeDaLeitura.ModuloAmigo
 {
     public class Amigo : EntidadeBase
     {
-        protected string nome;
-        protected string nomeResponsavel;
-        protected string telefone;
+        public string nome;
+        public string nomeResponsavel;
+        public string telefone;
 
         public Amigo(string nome, string nomeResponsavel, string telefone)
         {

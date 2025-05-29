@@ -9,12 +9,28 @@ namespace ClubeDaLeitura
         {
             TelaBase telaAmigo = new TelaAmigo();
             RepositorioBase repositorio = new RepositorioAmigo();
+
+            TelaPrincipal telaPrincipal = new TelaPrincipal();
             
             telaAmigo.repositorio = repositorio;
 
             while (true)
             {
-                telaAmigo.Cadastro();
+                telaPrincipal.MenuPrincipal();
+                string opcaoEscolhida = telaAmigo.OpcaoDoMenu();
+
+                switch (int.Parse(opcaoEscolhida))
+                {
+                    case 1:
+                        telaAmigo.Cadastro();
+                        break;
+                    case 2:
+                        telaAmigo.Visualizar();
+                        break;
+                    default:
+                        break;
+                }
+                
             }
         }
     }

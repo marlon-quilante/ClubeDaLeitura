@@ -2,7 +2,7 @@
 {
     public abstract class TelaBase
     {
-        private string entidade;
+        protected string entidade;
         private int idContador = 1;
         public RepositorioBase repositorio;
 
@@ -10,6 +10,23 @@
         {
             this.entidade = entidade;
             this.repositorio = repositorio;
+        }
+
+        public string OpcaoDoMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Controle de {entidade}s");
+            Console.WriteLine("------------------------");
+
+            Console.WriteLine("\nSelecione uma opção...\n");
+            Console.WriteLine("1 - Cadastrar");
+            Console.WriteLine("2 - Visualizar");
+            Console.WriteLine("3 - Editar");
+            Console.WriteLine("4 - Deletar");
+            Console.WriteLine("5 - Visualizar Empréstimos");
+
+            return Console.ReadLine();
         }
 
         public void Cadastro()
@@ -37,6 +54,8 @@
             idContador++;
             repositorio.CadastrarRegistro(novoRegistro);
         }
+
+        public abstract void Visualizar();
 
         protected abstract EntidadeBase ObterDados();
     }
