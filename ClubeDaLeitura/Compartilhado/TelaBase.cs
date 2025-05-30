@@ -12,23 +12,7 @@
             this.repositorio = repositorio;
         }
 
-        public int OpcaoDoMenu()
-        {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Controle de {entidade}s");
-            Console.WriteLine("------------------------");
-
-            Console.WriteLine("\nSelecione uma opção...\n");
-            Console.WriteLine("1 - Cadastrar");
-            Console.WriteLine("2 - Visualizar");
-            Console.WriteLine("3 - Editar");
-            Console.WriteLine("4 - Deletar");
-            Console.WriteLine("5 - Visualizar Empréstimos");
-            Console.WriteLine();
-
-            return int.Parse(Console.ReadLine());
-        }
+        public abstract int OpcaoDoMenu();
 
         public void Cadastro()
         {

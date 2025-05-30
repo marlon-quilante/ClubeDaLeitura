@@ -1,4 +1,5 @@
 ﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloAmigo;
 
 namespace ClubeDaLeitura.ModuloCaixa
 {
@@ -8,14 +9,11 @@ namespace ClubeDaLeitura.ModuloCaixa
         public string cor;
         public int diasEmprestimo = 7;
 
-        public override void Atualizar(EntidadeBase registroAtualizado)
+        public Caixa(string etiqueta, string cor, int diasEmprestimo)
         {
-            throw new NotImplementedException();
-        }
-
-        public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
-        {
-            throw new NotImplementedException();
+            this.etiqueta = etiqueta;
+            this.cor = cor;
+            this.diasEmprestimo = diasEmprestimo;
         }
 
         public override string Validacao(EntidadeBase registro, RepositorioBase repositorio)
@@ -24,8 +22,32 @@ namespace ClubeDaLeitura.ModuloCaixa
 
             if (etiqueta.Length < 3 || etiqueta.Length > 50 || string.IsNullOrWhiteSpace(etiqueta))
                 erros += "A etiqueta precisa conter de 3 a 50 carateres!\n";
+            if (RegistroExiste(registro, repositorio))
+                erros += "Esta etiqueta já foi cadastrada!\n";
 
             return erros;
+        }
+
+        public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
+        {
+            Caixa registroCaixa = (Caixa)registro;
+            RepositorioCaixa repositorioCaixa = (RepositorioCaixa)repositorio;
+
+            foreach (Caixa caixa in repositorioCaixa.listaRegistros)
+            {
+                if (caixa.etiqueta == registroCaixa.etiqueta)
+                    return true;
+            }
+            return false;
+        }
+
+        public override void Atualizar(EntidadeBase registroAtualizado)
+        {
+            Caixa caixaAtualizada = (Caixa)registroAtualizado;
+
+            etiqueta = caixaAtualizada.etiqueta;
+            cor = caixaAtualizada.cor;
+            diasEmprestimo = caixaAtualizada.diasEmprestimo;
         }
     }
 }

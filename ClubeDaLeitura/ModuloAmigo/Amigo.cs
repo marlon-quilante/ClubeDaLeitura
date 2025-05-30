@@ -26,7 +26,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             if (!TelefoneValido(telefone))
                 erros += "O telefone digitado não é válido!\n";
             if (RegistroExiste(registro, repositorio))
-                erros += "O nome ou o telefone já foi cadastrado!\n";
+                erros += "Este nome ou telefone já foi cadastrado!\n";
 
             return erros;
         }
@@ -39,9 +39,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             foreach (Amigo amigo in repositorioAmigo.listaRegistros)
             {
                 if (amigo.nome == registroAmigo.nome || amigo.telefone == registroAmigo.telefone)
-                {
                     return true;
-                }
             }
             return false;
         }

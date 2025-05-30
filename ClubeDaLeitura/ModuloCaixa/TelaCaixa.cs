@@ -1,10 +1,10 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 
-namespace ClubeDaLeitura.ModuloAmigo
+namespace ClubeDaLeitura.ModuloCaixa
 {
-    public class TelaAmigo : TelaBase
+    public class TelaCaixa : TelaBase
     {
-        public TelaAmigo() : base("Amigo", new RepositorioAmigo())
+        public TelaCaixa() : base ("Caixa", new RepositorioCaixa())
         {
         }
 
@@ -20,7 +20,6 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.WriteLine("2 - Visualizar");
             Console.WriteLine("3 - Editar");
             Console.WriteLine("4 - Deletar");
-            Console.WriteLine("5 - Visualizar Empréstimos");
             Console.WriteLine();
 
             return int.Parse(Console.ReadLine());
@@ -28,16 +27,16 @@ namespace ClubeDaLeitura.ModuloAmigo
 
         protected override EntidadeBase ObterDados()
         {
-            Console.Write("Nome do amigo: ");
-            string nomeAmigo = Console.ReadLine();
-            Console.Write("Nome do responsável: ");
-            string nomeResponsavel = Console.ReadLine();
-            Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
+            Console.Write("Etiqueta: ");
+            string etiqueta = Console.ReadLine();
+            Console.Write("Cor: ");
+            string cor = Console.ReadLine();
+            Console.Write("Dias de Empréstimo: ");
+            int diasEmprestimo = int.Parse(Console.ReadLine());
 
-            Amigo amigo = new Amigo(nomeAmigo, nomeResponsavel, telefone);
+            Caixa caixa = new Caixa(etiqueta, cor, diasEmprestimo);
 
-            return amigo;
+            return caixa;
         }
 
         public override void Visualizar()
@@ -48,13 +47,13 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.WriteLine("------------------------");
 
             Console.WriteLine();
-            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
-                "ID","Nome", "Responsável", "Telefone");
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-25}",
+                "ID", "Etiqueta", "Cor", "Dias de Empréstimo");
 
-            foreach (Amigo amigo in repositorio.listaRegistros)
+            foreach (Caixa caixa in repositorio.listaRegistros)
             {
-                Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
-                    amigo.id, amigo.nome, amigo.nomeResponsavel, amigo.telefone);
+                Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-25}",
+                    caixa.id, caixa.etiqueta, caixa.cor, caixa.diasEmprestimo);
             }
 
             Console.WriteLine("\nPressione ENTER para continuar...");

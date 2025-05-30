@@ -12,10 +12,16 @@ namespace ClubeDaLeitura.Compartilhado
         private RepositorioAmigo repositorioAmigo;
         private TelaAmigo telaAmigo;
 
+        private RepositorioCaixa repositorioCaixa;
+        private TelaCaixa telaCaixa;
+
         public TelaPrincipal()
         {
             repositorioAmigo = new RepositorioAmigo();
             telaAmigo = new TelaAmigo();
+
+            repositorioCaixa = new RepositorioCaixa();
+            telaCaixa = new TelaCaixa();
 
             telaAmigo.repositorio = repositorioAmigo;
         }
@@ -43,7 +49,7 @@ namespace ClubeDaLeitura.Compartilhado
             if (opcaoTelaEscolhida == 1)
                 return telaAmigo;
             else if (opcaoTelaEscolhida == 2)
-                return null;
+                return telaCaixa;
             else if (opcaoTelaEscolhida == 3)
                 return null;
             else if (opcaoTelaEscolhida == 4)
