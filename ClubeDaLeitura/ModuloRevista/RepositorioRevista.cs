@@ -2,5 +2,5 @@
 
 namespace ClubeDaLeitura.ModuloRevista
 {
-    internal class RepositorioRevista : RepositorioBase;
+    public class RepositorioRevista : RepositorioBase;
 }

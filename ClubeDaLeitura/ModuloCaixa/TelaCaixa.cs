@@ -4,8 +4,11 @@ namespace ClubeDaLeitura.ModuloCaixa
 {
     public class TelaCaixa : TelaBase
     {
-        public TelaCaixa() : base ("Caixa", new RepositorioCaixa())
+        private RepositorioCaixa repositorioCaixa;
+
+        public TelaCaixa(RepositorioCaixa repositorioCaixa) : base ("Caixa", repositorioCaixa)
         {
+            this.repositorioCaixa = repositorioCaixa;
         }
 
         public override int OpcaoDoMenu()
@@ -50,7 +53,7 @@ namespace ClubeDaLeitura.ModuloCaixa
             Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-25}",
                 "ID", "Etiqueta", "Cor", "Dias de Empréstimo");
 
-            foreach (Caixa caixa in repositorio.listaRegistros)
+            foreach (Caixa caixa in repositorioCaixa.listaRegistros)
             {
                 Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-25}",
                     caixa.id, caixa.etiqueta, caixa.cor, caixa.diasEmprestimo);

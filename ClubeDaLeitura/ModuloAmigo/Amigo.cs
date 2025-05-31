@@ -26,7 +26,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             if (!TelefoneValido(telefone))
                 erros += "O telefone digitado não é válido!\n";
             if (RegistroExiste(registro, repositorio))
-                erros += "Este nome ou telefone já foi cadastrado!\n";
+                erros += "Este nome ou telefone já estão cadastrados!\n";
 
             return erros;
         }

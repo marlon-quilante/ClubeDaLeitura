@@ -23,7 +23,7 @@ namespace ClubeDaLeitura.ModuloCaixa
             if (etiqueta.Length < 3 || etiqueta.Length > 50 || string.IsNullOrWhiteSpace(etiqueta))
                 erros += "A etiqueta precisa conter de 3 a 50 carateres!\n";
             if (RegistroExiste(registro, repositorio))
-                erros += "Esta etiqueta já foi cadastrada!\n";
+                erros += "Esta etiqueta já está cadastrada!\n";
 
             return erros;
         }

@@ -15,15 +15,22 @@ namespace ClubeDaLeitura.Compartilhado
         private RepositorioCaixa repositorioCaixa;
         private TelaCaixa telaCaixa;
 
+        private RepositorioRevista repositorioRevista;
+        private TelaRevista telaRevista;
+
         public TelaPrincipal()
         {
             repositorioAmigo = new RepositorioAmigo();
-            telaAmigo = new TelaAmigo();
+            telaAmigo = new TelaAmigo(repositorioAmigo);
 
             repositorioCaixa = new RepositorioCaixa();
-            telaCaixa = new TelaCaixa();
+            telaCaixa = new TelaCaixa(repositorioCaixa);
 
-            telaAmigo.repositorio = repositorioAmigo;
+            repositorioRevista = new RepositorioRevista();
+            telaRevista = new TelaRevista(repositorioRevista);
+
+            telaRevista.repositorioCaixa = repositorioCaixa;
+            telaRevista.telaCaixa = telaCaixa;
         }
 
         public void OpcaoDoMenu()
@@ -51,7 +58,7 @@ namespace ClubeDaLeitura.Compartilhado
             else if (opcaoTelaEscolhida == 2)
                 return telaCaixa;
             else if (opcaoTelaEscolhida == 3)
-                return null;
+                return telaRevista;
             else if (opcaoTelaEscolhida == 4)
                 return null;
             else

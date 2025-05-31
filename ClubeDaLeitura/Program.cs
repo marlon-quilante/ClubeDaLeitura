@@ -37,7 +37,6 @@ namespace ClubeDaLeitura
                     default:
                         break;
                 }
-                
             }
         }
     }

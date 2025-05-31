@@ -4,8 +4,11 @@ namespace ClubeDaLeitura.ModuloAmigo
 {
     public class TelaAmigo : TelaBase
     {
-        public TelaAmigo() : base("Amigo", new RepositorioAmigo())
+        private RepositorioAmigo repositorioAmigo;
+
+        public TelaAmigo(RepositorioAmigo repositorioAmigo) : base("Amigo", repositorioAmigo)
         {
+            this.repositorioAmigo = repositorioAmigo;
         }
 
         public override int OpcaoDoMenu()
@@ -51,7 +54,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
                 "ID","Nome", "Responsável", "Telefone");
 
-            foreach (Amigo amigo in repositorio.listaRegistros)
+            foreach (Amigo amigo in repositorioAmigo.listaRegistros)
             {
                 Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
                     amigo.id, amigo.nome, amigo.nomeResponsavel, amigo.telefone);

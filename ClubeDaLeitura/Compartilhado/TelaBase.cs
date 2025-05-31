@@ -1,10 +1,12 @@
-﻿namespace ClubeDaLeitura.Compartilhado
+﻿using ClubeDaLeitura.ModuloCaixa;
+
+namespace ClubeDaLeitura.Compartilhado
 {
     public abstract class TelaBase
     {
         protected string entidade;
         private int idContador = 1;
-        public RepositorioBase repositorio;
+        private RepositorioBase repositorio;
 
         public TelaBase(string entidade, RepositorioBase repositorio)
         {
@@ -80,10 +82,19 @@
             }
         }
 
-        private int ObterID()
+        public int ObterID()
         {
-            Console.Write("Digite o ID: ");
-            return int.Parse(Console.ReadLine());
+            Console.Write($"ID{entidade}: ");
+            int id = int.Parse(Console.ReadLine());
+
+            if (repositorio.IDExiste(id))
+                return id;
+            else
+            {
+                Console.WriteLine("ID não localizado! Pressione ENTER para tentar novamente...");
+                Console.ReadLine();
+                return ObterID();
+            }
         }
 
         protected abstract EntidadeBase ObterDados();
