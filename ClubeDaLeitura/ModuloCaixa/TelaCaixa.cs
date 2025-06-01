@@ -73,7 +73,13 @@ namespace ClubeDaLeitura.ModuloCaixa
             int id = ObterID();
             Console.WriteLine();
             if (repositorioCaixa.IDExiste(id))
+            {
                 repositorioCaixa.DeletarRegistro(id);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Exclusão realizada com sucesso!");
+                Console.ResetColor();
+                Console.ReadLine();
+            }
         }
     }
 }

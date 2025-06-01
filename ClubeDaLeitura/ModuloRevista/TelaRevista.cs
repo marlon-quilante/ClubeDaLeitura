@@ -79,7 +79,13 @@ namespace ClubeDaLeitura.ModuloRevista
             int id = ObterID();
             Console.WriteLine();
             if (repositorioRevista.IDExiste(id))
+            {
                 repositorioRevista.DeletarRegistro(id);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Exclusão realizada com sucesso!");
+                Console.ResetColor();
+                Console.ReadLine();
+            }
         }
     }
 }

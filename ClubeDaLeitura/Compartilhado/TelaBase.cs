@@ -37,9 +37,12 @@ namespace ClubeDaLeitura.Compartilhado
                 Cadastro();
                 return;
             }
-            Console.WriteLine("Cadastro realizado com sucesso!");
             idContador++;
             repositorioBase.CadastrarRegistro(novoRegistro);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Cadastro realizado com sucesso!");
+            Console.ResetColor();
+            Console.ReadLine();
         }
 
         public abstract void Visualizar();
@@ -57,6 +60,11 @@ namespace ClubeDaLeitura.Compartilhado
             {
                 EntidadeBase registroAtualizado = ObterDados();
                 repositorioBase.AtualizarRegistro(id, registroAtualizado);
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Edição realizada com sucesso!");
+                Console.ResetColor();
+                Console.ReadLine();
             }
             else
             {

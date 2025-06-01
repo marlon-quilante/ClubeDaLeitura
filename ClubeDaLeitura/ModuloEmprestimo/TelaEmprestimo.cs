@@ -63,7 +63,9 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Emprestimo novoEmprestimo = ObterDados();
             novoEmprestimo.id = idContador;
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Registro realizado com sucesso!");
+            Console.ResetColor();
             Console.ReadLine();
             idContador++;
             repositorioEmprestimo.CadastrarRegistro(novoEmprestimo);

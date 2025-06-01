@@ -102,10 +102,15 @@ namespace ClubeDaLeitura.ModuloAmigo
             if (repositorioAmigo.IDExiste(id))
             {
                 if (!repositorioAmigo.AmigoTemEmprestimo(id))
+                {
                     repositorioAmigo.DeletarRegistro(id);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Exclusão realizada com sucesso!");
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
                 else
                 {
-                    Console.WriteLine();
                     Console.WriteLine("Não é possível excluir este amigo pois ele possui empréstimo realizado! Pressione ENTER para voltar...");
                     Console.ReadLine();
                     return;
