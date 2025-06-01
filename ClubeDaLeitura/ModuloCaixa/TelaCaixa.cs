@@ -74,11 +74,20 @@ namespace ClubeDaLeitura.ModuloCaixa
             Console.WriteLine();
             if (repositorioCaixa.IDExiste(id))
             {
-                repositorioCaixa.DeletarRegistro(id);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Exclusão realizada com sucesso!");
-                Console.ResetColor();
-                Console.ReadLine();
+                if (!repositorioCaixa.CaixaTemRevista(id))
+                {
+                    repositorioCaixa.DeletarRegistro(id);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Exclusão realizada com sucesso!");
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("Não é possível excluir esta caixa pois ela possui revistas vinculadas! Pressione ENTER para voltar...");
+                    Console.ReadLine();
+                    return;
+                }
             }
         }
     }
