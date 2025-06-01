@@ -91,7 +91,6 @@ namespace ClubeDaLeitura.Compartilhado
 
         public int ObterID()
         {
-            Console.WriteLine();
             Console.Write($"ID{entidade}: ");
             int id = int.Parse(Console.ReadLine());
 
@@ -101,6 +100,7 @@ namespace ClubeDaLeitura.Compartilhado
             {
                 Console.WriteLine();
                 Console.Write("ID não localizado! Pressione ENTER para tentar novamente...");
+                Console.WriteLine();
                 Console.ReadLine();
                 return ObterID();
             }

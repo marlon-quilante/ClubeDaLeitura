@@ -1,6 +1,4 @@
-﻿using ClubeDaLeitura.Compartilhado;
-using ClubeDaLeitura.ModuloAmigo;
-using ClubeDaLeitura.ModuloCaixa;
+﻿using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloEmprestimo
@@ -8,6 +6,9 @@ namespace ClubeDaLeitura.ModuloEmprestimo
     public class TelaEmprestimo
     {
         private int idContador = 1;
+
+        public Amigo amigo;
+        public Revista revista;
 
         public TelaAmigo telaAmigo;
         public TelaRevista telaRevista;
@@ -40,12 +41,13 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         protected Emprestimo ObterDados()
         {
             int IDAmigo = telaAmigo.ObterID();
-            Amigo amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(IDAmigo);
+            amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(IDAmigo);
 
             int IDRevista = telaRevista.ObterID();
-            Revista revista = (Revista)repositorioRevista.BuscarRegistroPorID(IDRevista);
+            revista = (Revista)repositorioRevista.BuscarRegistroPorID(IDRevista);
 
-            DateTime dataEmprestimo = DateTime.Now;
+            Console.Write("Data de empréstimo: ");
+            DateTime dataEmprestimo = DateTime.Parse(Console.ReadLine());
             DateTime dataDevolucao = dataEmprestimo.AddDays(revista.caixa.diasEmprestimo);
 
             Emprestimo emprestimo = new Emprestimo(amigo, revista, dataEmprestimo, dataDevolucao);
@@ -69,6 +71,11 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Console.ReadLine();
             idContador++;
             repositorioEmprestimo.CadastrarRegistro(novoEmprestimo);
+
+            if (novoEmprestimo.dataEmprestimo > DateTime.Now)
+                novoEmprestimo.revista.status = "Reservada";
+            else
+                novoEmprestimo.revista.status = "Emprestada";
         }
 
         public void Visualizar()
