@@ -52,7 +52,7 @@ namespace ClubeDaLeitura.ModuloRevista
         {
             Console.Clear();
             Console.WriteLine("------------------------");
-            Console.WriteLine($"{entidade}s Cadastrados");
+            Console.WriteLine($"Revistas Cadastradas");
             Console.WriteLine("------------------------");
 
             Console.WriteLine();

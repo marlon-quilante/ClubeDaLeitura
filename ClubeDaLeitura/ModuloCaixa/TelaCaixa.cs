@@ -15,7 +15,7 @@ namespace ClubeDaLeitura.ModuloCaixa
         {
             Console.Clear();
             Console.WriteLine("------------------------");
-            Console.WriteLine($"Controle de {entidade}s");
+            Console.WriteLine($"Controle de Caixas");
             Console.WriteLine("------------------------");
 
             Console.WriteLine("\nSelecione uma opção...\n");
@@ -46,7 +46,7 @@ namespace ClubeDaLeitura.ModuloCaixa
         {
             Console.Clear();
             Console.WriteLine("------------------------");
-            Console.WriteLine($"{entidade}s Cadastrados");
+            Console.WriteLine($"Caixas Cadastrados");
             Console.WriteLine("------------------------");
 
             Console.WriteLine();

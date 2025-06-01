@@ -15,7 +15,7 @@ namespace ClubeDaLeitura.ModuloAmigo
         {
             Console.Clear();
             Console.WriteLine("------------------------");
-            Console.WriteLine($"Controle de {entidade}s");
+            Console.WriteLine($"Controle de Amigos");
             Console.WriteLine("------------------------");
 
             Console.WriteLine("\nSelecione uma opção...\n");
@@ -47,7 +47,7 @@ namespace ClubeDaLeitura.ModuloAmigo
         {
             Console.Clear();
             Console.WriteLine("------------------------");
-            Console.WriteLine($"{entidade}s Cadastrados");
+            Console.WriteLine($"Amigos Cadastrados");
             Console.WriteLine("------------------------");
 
             Console.WriteLine();
