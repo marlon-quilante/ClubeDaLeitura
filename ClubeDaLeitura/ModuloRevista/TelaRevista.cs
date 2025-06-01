@@ -68,5 +68,16 @@ namespace ClubeDaLeitura.ModuloRevista
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
         }
+
+        public override void Deletar()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Exclusão de Revista");
+            Console.WriteLine("------------------------");
+            int id = ObterID();
+            if (repositorioRevista.IDExiste(id))
+                repositorioRevista.DeletarRegistro(id);
+        }
     }
 }

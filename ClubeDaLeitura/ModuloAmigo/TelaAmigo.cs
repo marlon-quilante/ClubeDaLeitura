@@ -52,7 +52,7 @@ namespace ClubeDaLeitura.ModuloAmigo
 
             Console.WriteLine();
             Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
-                "ID","Nome", "Responsável", "Telefone");
+                "ID", "Nome", "Responsável", "Telefone");
 
             foreach (Amigo amigo in repositorioAmigo.listaRegistros)
             {
@@ -62,6 +62,36 @@ namespace ClubeDaLeitura.ModuloAmigo
 
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
+        }
+
+        public override void Deletar()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Exclusão de Amigo");
+            Console.WriteLine("------------------------");
+            Console.WriteLine();
+
+            int id = ObterID();
+            if (repositorioAmigo.IDExiste(id))
+            {
+                if (!repositorioAmigo.AmigoTemEmprestimo(id))
+                    repositorioAmigo.DeletarRegistro(id);
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Não é possível excluir este amigo pois ele possui empréstimo realizado! Pressione ENTER para voltar...");
+                    Console.ReadLine();
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Amigo não encontrado por esse ID! Pressione ENTER para tentar novamente...");
+                Console.ReadLine();
+                Deletar();
+                return;
+            }
         }
     }
 }

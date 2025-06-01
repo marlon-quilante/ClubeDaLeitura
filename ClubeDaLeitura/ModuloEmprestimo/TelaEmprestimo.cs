@@ -77,12 +77,12 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Console.WriteLine("------------------------");
 
             Console.WriteLine();
-            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-15} | {4,-15} | {5,-10}",
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
                 "ID", "Amigo", "Revista", "Data de Empréstimo", "Data de Devolução", "Status");
 
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
             {
-                Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-15} | {4,-10} | {5,-10}",
+                Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
                     emprestimo.id, emprestimo.amigo.nome, emprestimo.revista.titulo, emprestimo.dataEmprestimo.ToShortDateString(), emprestimo.dataDevolucao.ToShortDateString(), emprestimo.status);
             }
 

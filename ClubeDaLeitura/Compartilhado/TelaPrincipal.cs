@@ -42,6 +42,8 @@ namespace ClubeDaLeitura.Compartilhado
             telaEmprestimo.telaAmigo = telaAmigo;
             telaEmprestimo.repositorioRevista = repositorioRevista;
             telaEmprestimo.telaRevista = telaRevista;
+
+            repositorioAmigo.repositorioEmprestimo = repositorioEmprestimo;
         }
 
         public void OpcaoDoMenu()

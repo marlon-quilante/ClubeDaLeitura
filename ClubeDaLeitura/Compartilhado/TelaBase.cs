@@ -6,12 +6,12 @@ namespace ClubeDaLeitura.Compartilhado
     {
         protected string entidade;
         private int idContador = 1;
-        private RepositorioBase repositorio;
+        private RepositorioBase repositorioBase;
 
         public TelaBase(string entidade, RepositorioBase repositorio)
         {
             this.entidade = entidade;
-            this.repositorio = repositorio;
+            this.repositorioBase = repositorio;
         }
 
         public abstract int OpcaoDoMenu();
@@ -25,7 +25,7 @@ namespace ClubeDaLeitura.Compartilhado
 
             EntidadeBase novoRegistro = ObterDados();
             novoRegistro.id = idContador;
-            string erros = novoRegistro.Validacao(novoRegistro, repositorio);
+            string erros = novoRegistro.Validacao(novoRegistro, repositorioBase);
             Console.WriteLine();
             if (erros != "")
             {
@@ -39,7 +39,7 @@ namespace ClubeDaLeitura.Compartilhado
             }
             Console.WriteLine("Cadastro realizado com sucesso!");
             idContador++;
-            repositorio.CadastrarRegistro(novoRegistro);
+            repositorioBase.CadastrarRegistro(novoRegistro);
         }
 
         public abstract void Visualizar();
@@ -53,10 +53,10 @@ namespace ClubeDaLeitura.Compartilhado
             Console.WriteLine();
 
             int id = ObterID();
-            if (repositorio.IDExiste(id))
+            if (repositorioBase.IDExiste(id))
             {
                 EntidadeBase registroAtualizado = ObterDados();
-                repositorio.AtualizarRegistro(id, registroAtualizado);
+                repositorioBase.AtualizarRegistro(id, registroAtualizado);
             }
             else
             {
@@ -67,30 +67,18 @@ namespace ClubeDaLeitura.Compartilhado
             }
         }
 
-        public void Deletar()
-        {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Exclusão de {entidade}");
-            Console.WriteLine("------------------------");
-            Console.WriteLine();
-
-            int id = ObterID();
-            if (repositorio.IDExiste(id))
-            {
-                repositorio.DeletarRegistro(id);
-            }
-        }
+        public abstract void Deletar();
 
         public int ObterID()
         {
             Console.Write($"ID{entidade}: ");
             int id = int.Parse(Console.ReadLine());
 
-            if (repositorio.IDExiste(id))
+            if (repositorioBase.IDExiste(id))
                 return id;
             else
             {
+                Console.WriteLine();
                 Console.WriteLine("ID não localizado! Pressione ENTER para tentar novamente...");
                 Console.ReadLine();
                 return ObterID();

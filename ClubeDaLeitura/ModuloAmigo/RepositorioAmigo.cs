@@ -1,6 +1,20 @@
 ﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloEmprestimo;
 
 namespace ClubeDaLeitura.ModuloAmigo
 {
-    public class RepositorioAmigo : RepositorioBase;
+    public class RepositorioAmigo : RepositorioBase
+    {
+        public RepositorioEmprestimo repositorioEmprestimo;
+
+        public bool AmigoTemEmprestimo(int idAmigo)
+        {
+            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
+            {
+                if (idAmigo == emprestimo.amigo.id)
+                    return true;
+            }
+            return false;
+        }
+    }
 }
