@@ -20,7 +20,33 @@ namespace ClubeDaLeitura
                 if (telaEscolhida == null && telaEmprestimo == null)
                     break;
 
-                if (telaEscolhida == telaPrincipal.telaAmigo || telaEscolhida == telaPrincipal.telaCaixa 
+                if (telaEscolhida == telaPrincipal.telaAmigo)
+                {
+                    int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
+
+                    switch (opcaoEscolhida)
+                    {
+                        case 1:
+                            telaEscolhida.Cadastro();
+                            break;
+                        case 2:
+                            telaEscolhida.Visualizar();
+                            break;
+                        case 3:
+                            telaEscolhida.Editar();
+                            break;
+                        case 4:
+                            telaEscolhida.Deletar();
+                            break;
+                        case 5:
+                            telaPrincipal.telaAmigo.VisualizarEmprestimos();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                if (telaEscolhida == telaPrincipal.telaCaixa 
                     || telaEscolhida == telaPrincipal.telaRevista)
                 {
                     int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();

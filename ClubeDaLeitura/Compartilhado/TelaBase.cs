@@ -50,9 +50,9 @@ namespace ClubeDaLeitura.Compartilhado
             Console.WriteLine("------------------------");
             Console.WriteLine($"Edição de {entidade}");
             Console.WriteLine("------------------------");
-            Console.WriteLine();
 
             int id = ObterID();
+            Console.WriteLine();
             if (repositorioBase.IDExiste(id))
             {
                 EntidadeBase registroAtualizado = ObterDados();
@@ -71,6 +71,7 @@ namespace ClubeDaLeitura.Compartilhado
 
         public int ObterID()
         {
+            Console.WriteLine();
             Console.Write($"ID{entidade}: ");
             int id = int.Parse(Console.ReadLine());
 
@@ -79,7 +80,7 @@ namespace ClubeDaLeitura.Compartilhado
             else
             {
                 Console.WriteLine();
-                Console.WriteLine("ID não localizado! Pressione ENTER para tentar novamente...");
+                Console.Write("ID não localizado! Pressione ENTER para tentar novamente...");
                 Console.ReadLine();
                 return ObterID();
             }

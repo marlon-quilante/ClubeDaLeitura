@@ -1,10 +1,12 @@
 ﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloEmprestimo;
 
 namespace ClubeDaLeitura.ModuloAmigo
 {
     public class TelaAmigo : TelaBase
     {
         private RepositorioAmigo repositorioAmigo;
+        public RepositorioEmprestimo repositorioEmprestimo;
 
         public TelaAmigo(RepositorioAmigo repositorioAmigo) : base("Amigo", repositorioAmigo)
         {
@@ -64,15 +66,39 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.ReadLine();
         }
 
+        public void VisualizarEmprestimos()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Empréstimos do Amigo");
+            Console.WriteLine("------------------------");
+
+            int idAmigo = ObterID();
+
+            Console.WriteLine();
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
+                "ID", "Revista", "Data de Empréstimo", "Data de Devolução");
+
+            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
+            {
+                if (idAmigo == emprestimo.amigo.id)
+                    Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
+                    emprestimo.id, emprestimo.revista.titulo, emprestimo.dataEmprestimo.ToShortDateString(), emprestimo.dataDevolucao.ToShortDateString());
+            }
+
+            Console.WriteLine("\nPressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+
         public override void Deletar()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
             Console.WriteLine($"Exclusão de Amigo");
             Console.WriteLine("------------------------");
-            Console.WriteLine();
 
             int id = ObterID();
+            Console.WriteLine();
             if (repositorioAmigo.IDExiste(id))
             {
                 if (!repositorioAmigo.AmigoTemEmprestimo(id))

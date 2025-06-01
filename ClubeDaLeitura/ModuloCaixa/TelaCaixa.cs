@@ -69,7 +69,9 @@ namespace ClubeDaLeitura.ModuloCaixa
             Console.WriteLine("------------------------");
             Console.WriteLine($"Exclusão de Caixa");
             Console.WriteLine("------------------------");
+
             int id = ObterID();
+            Console.WriteLine();
             if (repositorioCaixa.IDExiste(id))
                 repositorioCaixa.DeletarRegistro(id);
         }

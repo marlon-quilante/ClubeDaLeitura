@@ -75,7 +75,9 @@ namespace ClubeDaLeitura.ModuloRevista
             Console.WriteLine("------------------------");
             Console.WriteLine($"Exclusão de Revista");
             Console.WriteLine("------------------------");
+
             int id = ObterID();
+            Console.WriteLine();
             if (repositorioRevista.IDExiste(id))
                 repositorioRevista.DeletarRegistro(id);
         }
