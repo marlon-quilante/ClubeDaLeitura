@@ -4,27 +4,21 @@ using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloEmprestimo
 {
-    public class Emprestimo : EntidadeBase
+    public class Emprestimo
     {
+        public int id;
         public Amigo amigo;
         public Revista revista;
-        public DateTime dataEmprestimo = DateTime.Now;
+        public DateTime dataEmprestimo;
         public DateTime dataDevolucao;
-        public string status;
+        public string status = "Aberto";
 
-        public override string Validacao(EntidadeBase registro, RepositorioBase repositorio)
+        public Emprestimo(Amigo amigo, Revista revista, DateTime dataEmprestimo, DateTime dataDevolucao)
         {
-            return "";
-        }
-
-        public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Atualizar(EntidadeBase registroAtualizado)
-        {
-            throw new NotImplementedException();
+            this.amigo = amigo;
+            this.revista = revista;
+            this.dataEmprestimo = dataEmprestimo;
+            this.dataDevolucao = dataDevolucao;
         }
     }
 }

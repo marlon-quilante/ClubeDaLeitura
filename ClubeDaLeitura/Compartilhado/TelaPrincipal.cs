@@ -10,13 +10,16 @@ namespace ClubeDaLeitura.Compartilhado
         private int opcaoTelaEscolhida;
 
         private RepositorioAmigo repositorioAmigo;
-        private TelaAmigo telaAmigo;
+        public TelaAmigo telaAmigo;
 
         private RepositorioCaixa repositorioCaixa;
-        private TelaCaixa telaCaixa;
+        public TelaCaixa telaCaixa;
 
         private RepositorioRevista repositorioRevista;
-        private TelaRevista telaRevista;
+        public TelaRevista telaRevista;
+
+        private RepositorioEmprestimo repositorioEmprestimo;
+        public TelaEmprestimo telaEmprestimo;
 
         public TelaPrincipal()
         {
@@ -29,8 +32,16 @@ namespace ClubeDaLeitura.Compartilhado
             repositorioRevista = new RepositorioRevista();
             telaRevista = new TelaRevista(repositorioRevista);
 
+            repositorioEmprestimo = new RepositorioEmprestimo();
+            telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo);
+
             telaRevista.repositorioCaixa = repositorioCaixa;
             telaRevista.telaCaixa = telaCaixa;
+
+            telaEmprestimo.repositorioAmigo = repositorioAmigo;
+            telaEmprestimo.telaAmigo = telaAmigo;
+            telaEmprestimo.repositorioRevista = repositorioRevista;
+            telaEmprestimo.telaRevista = telaRevista;
         }
 
         public void OpcaoDoMenu()
@@ -59,8 +70,14 @@ namespace ClubeDaLeitura.Compartilhado
                 return telaCaixa;
             else if (opcaoTelaEscolhida == 3)
                 return telaRevista;
-            else if (opcaoTelaEscolhida == 4)
+            else
                 return null;
+        }
+
+        public TelaEmprestimo EscolherEmprestimo()
+        {
+            if (opcaoTelaEscolhida == 4)
+                return telaEmprestimo;
             else
                 return null;
         }

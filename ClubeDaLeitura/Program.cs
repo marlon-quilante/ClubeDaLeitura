@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloAmigo;
+using ClubeDaLeitura.ModuloEmprestimo;
 
 namespace ClubeDaLeitura
 {
@@ -14,28 +15,54 @@ namespace ClubeDaLeitura
                 telaPrincipal.OpcaoDoMenu();
 
                 TelaBase telaEscolhida = telaPrincipal.EscolherTela();
+                TelaEmprestimo telaEmprestimo = telaPrincipal.EscolherEmprestimo();
 
-                if (telaEscolhida == null)
+                if (telaEscolhida == null && telaEmprestimo == null)
                     break;
 
-                int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
-
-                switch (opcaoEscolhida)
+                if (telaEscolhida == telaPrincipal.telaAmigo || telaEscolhida == telaPrincipal.telaCaixa 
+                    || telaEscolhida == telaPrincipal.telaRevista)
                 {
-                    case 1:
-                        telaEscolhida.Cadastro();
-                        break;
-                    case 2:
-                        telaEscolhida.Visualizar();
-                        break;
-                    case 3:
-                        telaEscolhida.Editar();
-                        break;
-                    case 4:
-                        telaEscolhida.Deletar();
-                        break;
-                    default:
-                        break;
+                    int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
+
+                    switch (opcaoEscolhida)
+                    {
+                        case 1:
+                            telaEscolhida.Cadastro();
+                            break;
+                        case 2:
+                            telaEscolhida.Visualizar();
+                            break;
+                        case 3:
+                            telaEscolhida.Editar();
+                            break;
+                        case 4:
+                            telaEscolhida.Deletar();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                else if (telaEmprestimo == telaPrincipal.telaEmprestimo)
+                {
+                    int opcaoEscolhida = telaEmprestimo.OpcaoDoMenu();
+
+                    switch (opcaoEscolhida)
+                    {
+                        case 1:
+                            telaEmprestimo.Registro();
+                            break;
+                        case 2:
+                            telaEmprestimo.Visualizar();
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

@@ -56,12 +56,12 @@ namespace ClubeDaLeitura.ModuloRevista
             Console.WriteLine("------------------------");
 
             Console.WriteLine();
-            Console.WriteLine("{0,-5} | {1,-25} | {2,-20} | {3,-25} | {4,-25} | {5,-15}",
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-20} | {3,-25} | {4,-20} | {5,-10}",
                 "ID", "Título", "Número da Edição", "Ano da Publicação", "Caixa", "Status");
 
             foreach (Revista revista in repositorioRevista.listaRegistros)
             {
-                Console.WriteLine("{0,-5} | {1,-25} | {2,-20} | {3,-25} | {4,-25} | {5,-15}",
+                Console.WriteLine("{0,-5} | {1,-25} | {2,-20} | {3,-25} | {4,-20} | {5,-10}",
                     revista.id, revista.titulo, revista.numeroEdicao, revista.anoPublicacao.Year, revista.caixa.etiqueta, revista.status);
             }
 
