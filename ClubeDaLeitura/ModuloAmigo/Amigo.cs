@@ -38,7 +38,7 @@ namespace ClubeDaLeitura.ModuloAmigo
 
             foreach (Amigo amigo in repositorioAmigo.listaRegistros)
             {
-                if (amigo.nome == registroAmigo.nome || amigo.telefone == registroAmigo.telefone)
+                if ((amigo.nome == registroAmigo.nome || amigo.telefone == registroAmigo.telefone) && registroAmigo.id != amigo.id)
                     return true;
             }
             return false;

@@ -59,8 +59,20 @@ namespace ClubeDaLeitura.Compartilhado
             if (repositorioBase.IDExiste(id))
             {
                 EntidadeBase registroAtualizado = ObterDados();
-                repositorioBase.AtualizarRegistro(id, registroAtualizado);
+                registroAtualizado.id = id;
+                string erros = registroAtualizado.Validacao(registroAtualizado, repositorioBase);
                 Console.WriteLine();
+                if (erros != "")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(erros);
+                    Console.ResetColor();
+                    Console.WriteLine("Pressione ENTER para tentar novamente...");
+                    Console.ReadLine();
+                    Editar();
+                    return;
+                }
+                repositorioBase.AtualizarRegistro(id, registroAtualizado);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Edição realizada com sucesso!");
                 Console.ResetColor();
