@@ -41,8 +41,17 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         protected Emprestimo ObterDados()
         {
             int idAmigo = telaAmigo.ObterID();
-            amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(idAmigo);
 
+            if (repositorioAmigo.AmigoTemEmprestimo(idAmigo))
+            {
+                Console.WriteLine();
+                Console.WriteLine("Este amigo já possui um empréstimo realizado! Pressione ENTER para tentar novamente...");
+                Console.WriteLine();
+                return ObterDados();
+            }
+
+            amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(idAmigo);
+            
             int idRevista = telaRevista.ObterID();
             revista = (Revista)repositorioRevista.BuscarRegistroPorID(idRevista);
 
