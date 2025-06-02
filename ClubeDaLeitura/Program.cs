@@ -21,75 +21,90 @@ namespace ClubeDaLeitura
 
                 if (telaEscolhida == telaPrincipal.telaAmigo)
                 {
-                    int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
-
-                    switch (opcaoEscolhida)
-                    {
-                        case 1:
-                            telaEscolhida.Cadastro();
-                            break;
-                        case 2:
-                            telaEscolhida.Visualizar();
-                            break;
-                        case 3:
-                            telaEscolhida.Editar();
-                            break;
-                        case 4:
-                            telaEscolhida.Deletar();
-                            break;
-                        case 5:
-                            telaPrincipal.telaAmigo.VisualizarEmprestimos();
-                            break;
-                        default:
-                            break;
-                    }
+                    ControleDeAmigos(telaPrincipal, telaEscolhida);
                 }
 
                 if (telaEscolhida == telaPrincipal.telaCaixa 
                     || telaEscolhida == telaPrincipal.telaRevista)
                 {
-                    int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
-
-                    switch (opcaoEscolhida)
-                    {
-                        case 1:
-                            telaEscolhida.Cadastro();
-                            break;
-                        case 2:
-                            telaEscolhida.Visualizar();
-                            break;
-                        case 3:
-                            telaEscolhida.Editar();
-                            break;
-                        case 4:
-                            telaEscolhida.Deletar();
-                            break;
-                        default:
-                            break;
-                    }
+                    ControleGenerico(telaPrincipal, telaEscolhida);
                 }
 
                 else if (telaEmprestimo == telaPrincipal.telaEmprestimo)
                 {
-                    int opcaoEscolhida = telaEmprestimo.OpcaoDoMenu();
-
-                    switch (opcaoEscolhida)
-                    {
-                        case 1:
-                            telaEmprestimo.RegistroDeEmprestimo();
-                            break;
-                        case 2:
-                            telaEmprestimo.Visualizar();
-                            break;
-                        case 3:
-                            telaEmprestimo.RegistroDeDevolucao();
-                            break;
-                        case 4:
-                            break;
-                        default:
-                            break;
-                    }
+                    ControleDeEmprestimos(telaPrincipal, telaEmprestimo);
                 }
+            }
+        }
+
+        static void ControleDeAmigos(TelaPrincipal telaPrincipal, TelaBase telaEscolhida)
+        {
+            int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
+
+            switch (opcaoEscolhida)
+            {
+                case 1:
+                    telaEscolhida.Cadastro();
+                    break;
+                case 2:
+                    telaEscolhida.Visualizar();
+                    break;
+                case 3:
+                    telaEscolhida.Editar();
+                    break;
+                case 4:
+                    telaEscolhida.Deletar();
+                    break;
+                case 5:
+                    telaPrincipal.telaAmigo.VisualizarEmprestimos();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        static void ControleGenerico(TelaPrincipal telaPrincipal, TelaBase telaEscolhida)
+        {
+            int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
+
+            switch (opcaoEscolhida)
+            {
+                case 1:
+                    telaEscolhida.Cadastro();
+                    break;
+                case 2:
+                    telaEscolhida.Visualizar();
+                    break;
+                case 3:
+                    telaEscolhida.Editar();
+                    break;
+                case 4:
+                    telaEscolhida.Deletar();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        static void ControleDeEmprestimos(TelaPrincipal telaPrincipal, TelaEmprestimo telaEmprestimo)
+        {
+            int opcaoEscolhida = telaEmprestimo.OpcaoDoMenu();
+
+            switch (opcaoEscolhida)
+            {
+                case 1:
+                    telaEmprestimo.RegistroDeEmprestimo();
+                    break;
+                case 2:
+                    telaEmprestimo.Visualizar();
+                    break;
+                case 3:
+                    telaEmprestimo.RegistroDeDevolucao();
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
             }
         }
     }
