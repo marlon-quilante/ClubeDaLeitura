@@ -79,7 +79,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
                 "ID", "Revista", "Data de Empréstimo", "Data de Devolução");
 
-            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
+            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
             {
                 if (idAmigo == emprestimo.amigo.id)
                     Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",

@@ -1,4 +1,5 @@
-﻿using ClubeDaLeitura.ModuloAmigo;
+﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloEmprestimo
@@ -40,11 +41,11 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 
         protected Emprestimo ObterDados()
         {
-            int IDAmigo = telaAmigo.ObterID();
-            amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(IDAmigo);
+            int idAmigo = telaAmigo.ObterID();
+            amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(idAmigo);
 
-            int IDRevista = telaRevista.ObterID();
-            revista = (Revista)repositorioRevista.BuscarRegistroPorID(IDRevista);
+            int idRevista = telaRevista.ObterID();
+            revista = (Revista)repositorioRevista.BuscarRegistroPorID(idRevista);
 
             Console.Write("Data de empréstimo: ");
             DateTime dataEmprestimo = DateTime.Parse(Console.ReadLine());
@@ -55,7 +56,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             return emprestimo;
         }
 
-        public void Registro()
+        public void RegistroDeEmprestimo()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
@@ -89,7 +90,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
                 "ID", "Amigo", "Revista", "Data de Empréstimo", "Data de Devolução", "Status");
 
-            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
+            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
             {
                 Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
                     emprestimo.id, emprestimo.amigo.nome, emprestimo.revista.titulo, emprestimo.dataEmprestimo.ToShortDateString(), emprestimo.dataDevolucao.ToShortDateString(), emprestimo.status);
@@ -97,6 +98,35 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
+        }
+
+        public void RegistroDeDevolucao()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Registro de Devolução");
+            Console.WriteLine("------------------------");
+
+            int idEmprestimo = ObterID();
+            Emprestimo emprestimo = repositorioEmprestimo.BuscarRegistroPorID(idEmprestimo);
+            emprestimo.status = "Concluído";
+        }
+
+        public int ObterID()
+        {
+            Console.Write($"IDEmpréstimo: ");
+            int id = int.Parse(Console.ReadLine());
+
+            if (repositorioEmprestimo.IDExiste(id))
+                return id;
+            else
+            {
+                Console.WriteLine();
+                Console.Write("ID não localizado! Pressione ENTER para tentar novamente...");
+                Console.WriteLine();
+                Console.ReadLine();
+                return ObterID();
+            }
         }
     }
 }

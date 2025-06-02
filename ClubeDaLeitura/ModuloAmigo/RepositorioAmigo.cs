@@ -9,7 +9,7 @@ namespace ClubeDaLeitura.ModuloAmigo
 
         public bool AmigoTemEmprestimo(int idAmigo)
         {
-            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
+            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
             {
                 if (idAmigo == emprestimo.amigo.id)
                     return true;

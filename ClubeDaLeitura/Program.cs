@@ -77,12 +77,13 @@ namespace ClubeDaLeitura
                     switch (opcaoEscolhida)
                     {
                         case 1:
-                            telaEmprestimo.Registro();
+                            telaEmprestimo.RegistroDeEmprestimo();
                             break;
                         case 2:
                             telaEmprestimo.Visualizar();
                             break;
                         case 3:
+                            telaEmprestimo.RegistroDeDevolucao();
                             break;
                         case 4:
                             break;
