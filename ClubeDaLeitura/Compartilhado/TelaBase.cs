@@ -1,6 +1,4 @@
-﻿using ClubeDaLeitura.ModuloCaixa;
-
-namespace ClubeDaLeitura.Compartilhado
+﻿namespace ClubeDaLeitura.Compartilhado
 {
     public abstract class TelaBase
     {

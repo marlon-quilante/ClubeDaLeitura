@@ -1,5 +1,4 @@
 ﻿using ClubeDaLeitura.Compartilhado;
-using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloCaixa;
 
 namespace ClubeDaLeitura.ModuloRevista

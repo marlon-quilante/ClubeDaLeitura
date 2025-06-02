@@ -1,5 +1,4 @@
-﻿using ClubeDaLeitura.Compartilhado;
-using ClubeDaLeitura.ModuloAmigo;
+﻿using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloEmprestimo
@@ -92,8 +91,23 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
             {
-                Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
-                    emprestimo.id, emprestimo.amigo.nome, emprestimo.revista.titulo, emprestimo.dataEmprestimo.ToShortDateString(), emprestimo.dataDevolucao.ToShortDateString(), emprestimo.status);
+                if (emprestimo.dataDevolucao < DateTime.Now)
+                    emprestimo.status = "Atrasado";
+
+                if (emprestimo.status == "Atrasado")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
+                                       emprestimo.id, emprestimo.amigo.nome, emprestimo.revista.titulo,
+                                       emprestimo.dataEmprestimo.ToShortDateString(),
+                                       emprestimo.dataDevolucao.ToShortDateString(), emprestimo.status);
+                    Console.ResetColor();
+                }
+                else
+                    Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
+                        emprestimo.id, emprestimo.amigo.nome, emprestimo.revista.titulo,
+                        emprestimo.dataEmprestimo.ToShortDateString(),
+                        emprestimo.dataDevolucao.ToShortDateString(), emprestimo.status);
             }
 
             Console.WriteLine("\nPressione ENTER para continuar...");
