@@ -100,7 +100,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
             {
-                if (emprestimo.dataDevolucao < DateTime.Now)
+                if (emprestimo.dataDevolucao < DateTime.Now && emprestimo.status != "Concluído")
                     emprestimo.status = "Atrasado";
 
                 if (emprestimo.status == "Atrasado")

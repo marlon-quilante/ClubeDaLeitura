@@ -42,7 +42,8 @@ namespace ClubeDaLeitura.ModuloRevista
 
             foreach (Revista revista in repositorioRevista.listaRegistros)
             {
-                if (revista.titulo == registroRevista.titulo || revista.numeroEdicao == registroRevista.numeroEdicao)
+                if ((revista.titulo == registroRevista.titulo || revista.numeroEdicao == registroRevista.numeroEdicao)
+                    && registroRevista.id != revista.id)
                     return true;
             }
             return false;

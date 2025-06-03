@@ -1,4 +1,5 @@
 ﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloAmigo;
 
 namespace ClubeDaLeitura.ModuloCaixa
 {
@@ -34,7 +35,7 @@ namespace ClubeDaLeitura.ModuloCaixa
 
             foreach (Caixa caixa in repositorioCaixa.listaRegistros)
             {
-                if (caixa.etiqueta == registroCaixa.etiqueta)
+                if (caixa.etiqueta == registroCaixa.etiqueta && registroCaixa.id != caixa.id)
                     return true;
             }
             return false;
