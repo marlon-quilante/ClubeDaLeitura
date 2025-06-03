@@ -42,7 +42,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         {
             int idAmigo = telaAmigo.ObterID();
 
-            if (repositorioAmigo.AmigoTemEmprestimo(idAmigo))
+            if (repositorioAmigo.AmigoTemEmprestimoAtivo(idAmigo))
             {
                 Console.WriteLine();
                 Console.WriteLine("Este amigo já possui um empréstimo realizado! Pressione ENTER para tentar novamente...");

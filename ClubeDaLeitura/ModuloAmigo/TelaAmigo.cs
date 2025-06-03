@@ -101,7 +101,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.WriteLine();
             if (repositorioAmigo.IDExiste(id))
             {
-                if (!repositorioAmigo.AmigoTemEmprestimo(id))
+                if (!repositorioAmigo.AmigoTemEmprestimoAtivo(id))
                 {
                     repositorioAmigo.DeletarRegistro(id);
                     Console.ForegroundColor = ConsoleColor.Green;

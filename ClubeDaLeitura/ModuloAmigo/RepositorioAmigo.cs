@@ -7,11 +7,11 @@ namespace ClubeDaLeitura.ModuloAmigo
     {
         public RepositorioEmprestimo repositorioEmprestimo;
 
-        public bool AmigoTemEmprestimo(int idAmigo)
+        public bool AmigoTemEmprestimoAtivo(int idAmigo)
         {
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
             {
-                if (idAmigo == emprestimo.amigo.id)
+                if (idAmigo == emprestimo.amigo.id && emprestimo.status == "Aberto")
                     return true;
             }
             return false;
