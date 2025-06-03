@@ -1,11 +1,12 @@
-﻿using ClubeDaLeitura.ModuloAmigo;
+﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloEmprestimo
 {
-    public class Emprestimo
+    public class Emprestimo : EntidadeBase
     {
-        public int id;
+        
         public Amigo amigo;
         public Revista revista;
         public DateTime dataEmprestimo;
@@ -18,6 +19,47 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             this.revista = revista;
             this.dataEmprestimo = dataEmprestimo;
             this.dataDevolucao = dataDevolucao;
+
+            if (dataEmprestimo > DateTime.Now)
+                revista.status = "Reservada";
+            else
+                revista.status = "Emprestada";
+        }
+
+        public override void Atualizar(EntidadeBase registroAtualizado)
+        {            
+        }
+
+        public override bool RegistroExiste(EntidadeBase registro, RepositorioBase repositorio)
+        {
+            return false;
+        }
+
+        public override string Validacao(EntidadeBase registro, RepositorioBase repositorio)
+        {
+            string erros = "";
+
+            if (amigo == null)
+                erros += "O amigo é obrigatório!\n";
+
+            if (revista == null)
+                erros += "A revista é obrigatório!\n";
+
+            if (dataEmprestimo == DateTime.MinValue)
+                erros += "A data do empréstimo é obrigatório!\n";                      
+
+            return erros;
+        }
+
+        public bool EstaAtrasado()
+        {
+            if (dataDevolucao < DateTime.Now && status != "Concluído")
+            {
+                status = "Atrasado";
+                return true;
+            }
+
+            return false;
         }
     }
 }

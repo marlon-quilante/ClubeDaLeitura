@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloEmprestimo;
+using Microsoft.Win32;
 
 namespace ClubeDaLeitura.ModuloAmigo
 {
@@ -44,28 +45,7 @@ namespace ClubeDaLeitura.ModuloAmigo
 
             return amigo;
         }
-
-        public override void Visualizar()
-        {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Amigos Cadastrados");
-            Console.WriteLine("------------------------");
-
-            Console.WriteLine();
-            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
-                "ID", "Nome", "Responsável", "Telefone");
-
-            foreach (Amigo amigo in repositorioAmigo.listaRegistros)
-            {
-                Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
-                    amigo.id, amigo.nome, amigo.nomeResponsavel, amigo.telefone);
-            }
-
-            Console.WriteLine("\nPressione ENTER para continuar...");
-            Console.ReadLine();
-        }
-
+       
         public void VisualizarEmprestimos()
         {
             Console.Clear();
@@ -79,7 +59,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
                 "ID", "Revista", "Data de Empréstimo", "Data de Devolução");
 
-            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
+            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
             {
                 if (idAmigo == emprestimo.amigo.id)
                     Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
@@ -90,39 +70,25 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.ReadLine();
         }
 
-        public override void Deletar()
+        protected override bool VerificarRestricao(EntidadeBase registro)
         {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Exclusão de Amigo");
-            Console.WriteLine("------------------------");
+            Amigo amigo = (Amigo)registro;
 
-            int id = ObterID();
-            Console.WriteLine();
-            if (repositorioAmigo.IDExiste(id))
-            {
-                if (!repositorioAmigo.AmigoTemEmprestimoAtivo(id))
-                {
-                    repositorioAmigo.DeletarRegistro(id);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Exclusão realizada com sucesso!");
-                    Console.ResetColor();
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine("Não é possível excluir este amigo pois ele possui empréstimo realizado! Pressione ENTER para voltar...");
-                    Console.ReadLine();
-                    return;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Amigo não encontrado por esse ID! Pressione ENTER para tentar novamente...");
-                Console.ReadLine();
-                Deletar();
-                return;
-            }
+            return repositorioAmigo.AmigoTemEmprestimoAtivo(amigo.id);
+        }
+
+        protected override void ApresentarCabecalhoTabela()
+        {
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
+                "ID", "Nome", "Responsável", "Telefone");
+        }
+
+        protected override void ApresentarLinhaTabela(EntidadeBase registro)
+        {
+            Amigo amigo = (Amigo)registro;
+
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
+                amigo.id, amigo.nome, amigo.nomeResponsavel, amigo.telefone);
         }
     }
 }

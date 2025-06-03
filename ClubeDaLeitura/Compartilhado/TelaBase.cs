@@ -1,4 +1,6 @@
-﻿namespace ClubeDaLeitura.Compartilhado
+﻿using ClubeDaLeitura.ModuloAmigo;
+
+namespace ClubeDaLeitura.Compartilhado
 {
     public abstract class TelaBase
     {
@@ -11,8 +13,6 @@
             this.entidade = entidade;
             this.repositorioBase = repositorio;
         }
-
-        public abstract int OpcaoDoMenu();
 
         public void Cadastro()
         {
@@ -35,6 +35,7 @@
                 Cadastro();
                 return;
             }
+
             idContador++;
             repositorioBase.CadastrarRegistro(novoRegistro);
             Console.ForegroundColor = ConsoleColor.Green;
@@ -42,8 +43,6 @@
             Console.ResetColor();
             Console.ReadLine();
         }
-
-        public abstract void Visualizar();
 
         public void Editar()
         {
@@ -84,9 +83,6 @@
                 return;
             }
         }
-
-        public abstract void Deletar();
-
         public int ObterID()
         {
             Console.Write($"ID{entidade}: ");
@@ -103,6 +99,76 @@
                 return ObterID();
             }
         }
+
+
+        public abstract int OpcaoDoMenu();
+
+        public void Visualizar()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"{entidade} Cadastrados");
+            Console.WriteLine("------------------------");
+
+            Console.WriteLine();
+
+            ApresentarCabecalhoTabela();
+
+            foreach (EntidadeBase registro in repositorioBase.listaRegistros)
+            {
+                ApresentarLinhaTabela(registro);
+            }
+
+            Console.WriteLine("\nPressione ENTER para continuar...");
+
+            Console.ReadLine();
+        }
+
+        protected abstract void ApresentarLinhaTabela(EntidadeBase registro);
+
+
+        protected abstract void ApresentarCabecalhoTabela();
+
+
+        public virtual void Deletar()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Exclusão de {entidade}");
+            Console.WriteLine("------------------------");
+
+            int id = ObterID();
+
+            EntidadeBase registro = repositorioBase.BuscarRegistroPorID(id);
+
+            bool temRestricao = VerificarRestricao(registro);
+
+            if (temRestricao)
+            {
+                Console.WriteLine("Não é possível excluir este registro pois ele possui restrição! Pressione ENTER para voltar...");
+                Console.ReadLine();
+                return;
+            }
+
+            Console.WriteLine();
+            if (repositorioBase.IDExiste(id))
+            {
+                repositorioBase.DeletarRegistro(id);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Exclusão realizada com sucesso!");
+                Console.ResetColor();
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Registro não encontrado por esse ID! Pressione ENTER para tentar novamente...");
+                Console.ReadLine();
+                Deletar();
+                return;
+            }
+        }
+
+        protected abstract bool VerificarRestricao(EntidadeBase registro);        
 
         protected abstract EntidadeBase ObterDados();
     }

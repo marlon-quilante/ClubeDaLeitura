@@ -1,11 +1,14 @@
-﻿using ClubeDaLeitura.ModuloAmigo;
+﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloEmprestimo
 {
-    public class TelaEmprestimo
+    public class TelaEmprestimo : TelaBase
     {
         private int idContador = 1;
+
+        private string formatoColunasTabela = "{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}";
 
         public Amigo amigo;
         public Revista revista;
@@ -17,12 +20,12 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         public RepositorioAmigo repositorioAmigo;
         public RepositorioRevista repositorioRevista;
 
-        public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo)
+        public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo) : base("Emprestimo", repositorioEmprestimo)
         {
             this.repositorioEmprestimo = repositorioEmprestimo;
         }
 
-        public int OpcaoDoMenu()
+        public override int OpcaoDoMenu()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
@@ -51,7 +54,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             }
 
             amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(idAmigo);
-            
+
             int idRevista = telaRevista.ObterID();
             revista = (Revista)repositorioRevista.BuscarRegistroPorID(idRevista);
 
@@ -66,62 +69,29 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 
         public void RegistroDeEmprestimo()
         {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Registro de Empréstimo");
-            Console.WriteLine("------------------------");
-
-            Emprestimo novoEmprestimo = ObterDados();
-            novoEmprestimo.id = idContador;
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Registro realizado com sucesso!");
-            Console.ResetColor();
-            Console.ReadLine();
-            idContador++;
-            repositorioEmprestimo.CadastrarRegistro(novoEmprestimo);
-
-            if (novoEmprestimo.dataEmprestimo > DateTime.Now)
-                novoEmprestimo.revista.status = "Reservada";
-            else
-                novoEmprestimo.revista.status = "Emprestada";
+            base.Cadastro();
         }
 
-        public void Visualizar()
+        protected override void ApresentarCabecalhoTabela()
         {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Empréstimos Realizados");
-            Console.WriteLine("------------------------");
-
-            Console.WriteLine();
-            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
-                "ID", "Amigo", "Revista", "Data de Empréstimo", "Data de Devolução", "Status");
-
-            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
-            {
-                if (emprestimo.dataDevolucao < DateTime.Now && emprestimo.status != "Concluído")
-                    emprestimo.status = "Atrasado";
-
-                if (emprestimo.status == "Atrasado")
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
-                                       emprestimo.id, emprestimo.amigo.nome, emprestimo.revista.titulo,
-                                       emprestimo.dataEmprestimo.ToShortDateString(),
-                                       emprestimo.dataDevolucao.ToShortDateString(), emprestimo.status);
-                    Console.ResetColor();
-                }
-                else
-                    Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}",
-                        emprestimo.id, emprestimo.amigo.nome, emprestimo.revista.titulo,
-                        emprestimo.dataEmprestimo.ToShortDateString(),
-                        emprestimo.dataDevolucao.ToShortDateString(), emprestimo.status);
-            }
-
-            Console.WriteLine("\nPressione ENTER para continuar...");
-            Console.ReadLine();
+            Console.WriteLine(formatoColunasTabela,
+               "ID", "Amigo", "Revista", "Data de Empréstimo", "Data de Devolução", "Status");
         }
+
+        protected override void ApresentarLinhaTabela(EntidadeBase registro)
+        {
+            Emprestimo e = (Emprestimo)registro;            
+
+            if (e.EstaAtrasado())
+                Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine(formatoColunasTabela,
+                e.id, e.amigo.nome, e.revista.titulo,
+                e.dataEmprestimo.ToShortDateString(),
+                e.dataDevolucao.ToShortDateString(), e.status);
+
+            Console.ResetColor();
+        }        
 
         public void RegistroDeDevolucao()
         {
@@ -131,9 +101,10 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Console.WriteLine("------------------------");
 
             int idEmprestimo = ObterID();
-            Emprestimo emprestimo = repositorioEmprestimo.BuscarRegistroPorID(idEmprestimo);
+
+            Emprestimo emprestimo = (Emprestimo)repositorioEmprestimo.BuscarRegistroPorID(idEmprestimo);
             emprestimo.status = "Concluído";
-        }
+        }        
 
         public int ObterID()
         {
