@@ -1,6 +1,4 @@
-﻿using ClubeDaLeitura.ModuloAmigo;
-
-namespace ClubeDaLeitura.Compartilhado
+﻿namespace ClubeDaLeitura.Compartilhado
 {
     public abstract class TelaBase
     {
@@ -83,6 +81,7 @@ namespace ClubeDaLeitura.Compartilhado
                 return;
             }
         }
+
         public int ObterID()
         {
             Console.Write($"ID{entidade}: ");
@@ -99,7 +98,6 @@ namespace ClubeDaLeitura.Compartilhado
                 return ObterID();
             }
         }
-
 
         public abstract int OpcaoDoMenu();
 
@@ -126,9 +124,7 @@ namespace ClubeDaLeitura.Compartilhado
 
         protected abstract void ApresentarLinhaTabela(EntidadeBase registro);
 
-
         protected abstract void ApresentarCabecalhoTabela();
-
 
         public virtual void Deletar()
         {
@@ -141,11 +137,12 @@ namespace ClubeDaLeitura.Compartilhado
 
             EntidadeBase registro = repositorioBase.BuscarRegistroPorID(id);
 
-            bool temRestricao = VerificarRestricao(registro);
+            bool temRestricao = TemRestricao(registro);
 
             if (temRestricao)
             {
-                Console.WriteLine("Não é possível excluir este registro pois ele possui restrição! Pressione ENTER para voltar...");
+                Console.WriteLine();
+                Console.WriteLine("Não é possível excluir este registro pois ele possui alguma restrição! Pressione ENTER para voltar...");
                 Console.ReadLine();
                 return;
             }
@@ -168,7 +165,7 @@ namespace ClubeDaLeitura.Compartilhado
             }
         }
 
-        protected abstract bool VerificarRestricao(EntidadeBase registro);        
+        protected abstract bool TemRestricao(EntidadeBase registro);        
 
         protected abstract EntidadeBase ObterDados();
     }

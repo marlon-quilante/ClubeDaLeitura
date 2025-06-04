@@ -9,9 +9,9 @@ namespace ClubeDaLeitura.ModuloAmigo
 
         public bool AmigoTemEmprestimoAtivo(int idAmigo)
         {
-            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimos)
+            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
             {
-                if (idAmigo == emprestimo.amigo.id && emprestimo.status == "Aberto")
+                if (idAmigo == emprestimo.amigo.id && emprestimo.status != "Concluído")
                     return true;
             }
             return false;

@@ -1,6 +1,5 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloEmprestimo;
-using Microsoft.Win32;
 
 namespace ClubeDaLeitura.ModuloAmigo
 {
@@ -70,7 +69,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.ReadLine();
         }
 
-        protected override bool VerificarRestricao(EntidadeBase registro)
+        protected override bool TemRestricao(EntidadeBase registro)
         {
             Amigo amigo = (Amigo)registro;
 

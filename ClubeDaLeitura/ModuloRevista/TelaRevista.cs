@@ -48,44 +48,23 @@ namespace ClubeDaLeitura.ModuloRevista
             return revista;
         }
 
-        public override void Visualizar()
+        protected override bool TemRestricao(EntidadeBase registro)
         {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Revistas Cadastradas");
-            Console.WriteLine("------------------------");
-
-            Console.WriteLine();
-            Console.WriteLine("{0,-5} | {1,-25} | {2,-20} | {3,-25} | {4,-20} | {5,-10}",
-                "ID", "Título", "Número da Edição", "Ano da Publicação", "Caixa", "Status");
-
-            foreach (Revista revista in repositorioRevista.listaRegistros)
-            {
-                Console.WriteLine("{0,-5} | {1,-25} | {2,-20} | {3,-25} | {4,-20} | {5,-10}",
-                    revista.id, revista.titulo, revista.numeroEdicao, revista.anoPublicacao.Year, revista.caixa.etiqueta, revista.status);
-            }
-
-            Console.WriteLine("\nPressione ENTER para continuar...");
-            Console.ReadLine();
+            return false;
         }
 
-        public override void Deletar()
+        protected override void ApresentarCabecalhoTabela()
         {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Exclusão de Revista");
-            Console.WriteLine("------------------------");
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-20} | {3,-25} | {4,-20} | {5,-10}",
+                "ID", "Título", "Número da Edição", "Ano da Publicação", "Caixa", "Status");
+        }
 
-            int id = ObterID();
-            Console.WriteLine();
-            if (repositorioRevista.IDExiste(id))
-            {
-                repositorioRevista.DeletarRegistro(id);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Exclusão realizada com sucesso!");
-                Console.ResetColor();
-                Console.ReadLine();
-            }
+        protected override void ApresentarLinhaTabela(EntidadeBase registro)
+        {
+            Revista revista = (Revista)registro;
+
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-20} | {3,-25} | {4,-20} | {5,-10}",
+                    revista.id, revista.titulo, revista.numeroEdicao, revista.anoPublicacao.Year, revista.caixa.etiqueta, revista.status);
         }
     }
 }

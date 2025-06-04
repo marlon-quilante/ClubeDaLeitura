@@ -1,4 +1,5 @@
 ﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloAmigo;
 
 namespace ClubeDaLeitura.ModuloCaixa
 {
@@ -42,53 +43,25 @@ namespace ClubeDaLeitura.ModuloCaixa
             return caixa;
         }
 
-        public override void Visualizar()
+        protected override void ApresentarCabecalhoTabela()
         {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Caixas Cadastrados");
-            Console.WriteLine("------------------------");
-
-            Console.WriteLine();
             Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-25}",
                 "ID", "Etiqueta", "Cor", "Dias de Empréstimo");
-
-            foreach (Caixa caixa in repositorioCaixa.listaRegistros)
-            {
-                Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-25}",
-                    caixa.id, caixa.etiqueta, caixa.cor, caixa.diasEmprestimo);
-            }
-
-            Console.WriteLine("\nPressione ENTER para continuar...");
-            Console.ReadLine();
         }
 
-        public override void Deletar()
+        protected override void ApresentarLinhaTabela(EntidadeBase registro)
         {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"Exclusão de Caixa");
-            Console.WriteLine("------------------------");
+            Caixa caixa = (Caixa)registro;
 
-            int id = ObterID();
-            Console.WriteLine();
-            if (repositorioCaixa.IDExiste(id))
-            {
-                if (!repositorioCaixa.CaixaTemRevista(id))
-                {
-                    repositorioCaixa.DeletarRegistro(id);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Exclusão realizada com sucesso!");
-                    Console.ResetColor();
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine("Não é possível excluir esta caixa pois ela possui revistas vinculadas! Pressione ENTER para voltar...");
-                    Console.ReadLine();
-                    return;
-                }
-            }
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-25}",
+                                caixa.id, caixa.etiqueta, caixa.cor, caixa.diasEmprestimo);
+        }
+
+        protected override bool TemRestricao(EntidadeBase registro)
+        {
+            Caixa caixa = (Caixa)registro;
+
+            return repositorioCaixa.CaixaTemRevista(caixa.id);
         }
     }
 }

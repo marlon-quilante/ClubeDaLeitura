@@ -6,8 +6,6 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 {
     public class TelaEmprestimo : TelaBase
     {
-        private int idContador = 1;
-
         private string formatoColunasTabela = "{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-20} | {5,-10}";
 
         public Amigo amigo;
@@ -20,7 +18,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         public RepositorioAmigo repositorioAmigo;
         public RepositorioRevista repositorioRevista;
 
-        public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo) : base("Emprestimo", repositorioEmprestimo)
+        public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo) : base("Empréstimo", repositorioEmprestimo)
         {
             this.repositorioEmprestimo = repositorioEmprestimo;
         }
@@ -41,7 +39,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             return int.Parse(Console.ReadLine());
         }
 
-        protected Emprestimo ObterDados()
+        protected override Emprestimo ObterDados()
         {
             int idAmigo = telaAmigo.ObterID();
 
@@ -49,6 +47,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             {
                 Console.WriteLine();
                 Console.WriteLine("Este amigo já possui um empréstimo realizado! Pressione ENTER para tentar novamente...");
+                Console.ReadLine();
                 Console.WriteLine();
                 return ObterDados();
             }
@@ -121,6 +120,11 @@ namespace ClubeDaLeitura.ModuloEmprestimo
                 Console.ReadLine();
                 return ObterID();
             }
+        }
+
+        protected override bool TemRestricao(EntidadeBase registro)
+        {
+            return false;
         }
     }
 }

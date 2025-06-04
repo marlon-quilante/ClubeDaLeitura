@@ -2,8 +2,5 @@
 
 namespace ClubeDaLeitura.ModuloEmprestimo
 {
-    public class RepositorioEmprestimo : RepositorioBase
-    {
-       
-    }
+    public class RepositorioEmprestimo : RepositorioBase;
 }
