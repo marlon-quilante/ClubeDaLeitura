@@ -10,7 +10,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         
         public Amigo amigo;
         public Revista revista;
-        public Multa multas;
+        public Multa multa;
         public DateTime dataEmprestimo;
         public DateTime dataDevolucao;
         public string status = "Aberto";
@@ -46,10 +46,10 @@ namespace ClubeDaLeitura.ModuloEmprestimo
                 erros += "O amigo é obrigatório!\n";
 
             if (revista == null)
-                erros += "A revista é obrigatório!\n";
+                erros += "A revista é obrigatória!\n";
 
             if (dataEmprestimo == DateTime.MinValue)
-                erros += "A data do empréstimo é obrigatório!\n";                      
+                erros += "A data do empréstimo é obrigatória!\n";                      
 
             return erros;
         }

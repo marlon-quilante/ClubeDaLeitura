@@ -33,7 +33,7 @@ namespace ClubeDaLeitura
 
                 TelaBase telaEscolhida = telaPrincipal.EscolherTela();
                 TelaEmprestimo telaEmprestimo = telaPrincipal.EscolherEmprestimo();
-                TelaMultas telaMultas = telaPrincipal.EscolherMultas();
+                TelaMulta telaMultas = telaPrincipal.EscolherMultas();
 
                 if (telaEscolhida == null && telaEmprestimo == null && telaMultas == null)
                     break;
@@ -54,7 +54,7 @@ namespace ClubeDaLeitura
                     ControleDeEmprestimos(telaPrincipal, telaEmprestimo);
                 }
 
-                else if (telaMultas == telaPrincipal.telaMultas)
+                else if (telaMultas == telaPrincipal.telaMulta)
                 {
                     ControleDeMultas(telaPrincipal, telaMultas);
                 }
@@ -81,6 +81,9 @@ namespace ClubeDaLeitura
                     break;
                 case 5:
                     telaPrincipal.telaAmigo.VisualizarEmprestimos();
+                    break;
+                case 6:
+                    telaPrincipal.telaAmigo.VisualizarMultas();
                     break;
                 default:
                     break;
@@ -130,7 +133,7 @@ namespace ClubeDaLeitura
             }
         }
 
-        static void ControleDeMultas(TelaPrincipal telaPrincipal, TelaMultas telaMultas)
+        static void ControleDeMultas(TelaPrincipal telaPrincipal, TelaMulta telaMultas)
         {
             int opcaoEscolhida = telaMultas.OpcaoDoMenu();
 

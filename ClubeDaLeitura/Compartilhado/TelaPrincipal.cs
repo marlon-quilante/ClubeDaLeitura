@@ -22,8 +22,8 @@ namespace ClubeDaLeitura.Compartilhado
         public RepositorioEmprestimo repositorioEmprestimo;
         public TelaEmprestimo telaEmprestimo;
 
-        public RepositorioMultas repositorioMultas;
-        public TelaMultas telaMultas;
+        public RepositorioMulta repositorioMultas;
+        public TelaMulta telaMulta;
 
         public TelaPrincipal()
         {
@@ -39,8 +39,8 @@ namespace ClubeDaLeitura.Compartilhado
             repositorioEmprestimo = new RepositorioEmprestimo();
             telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo);
 
-            repositorioMultas = new RepositorioMultas();
-            telaMultas = new TelaMultas(repositorioMultas);
+            repositorioMultas = new RepositorioMulta();
+            telaMulta = new TelaMulta(repositorioMultas);
 
             telaRevista.repositorioCaixa = repositorioCaixa;
             telaRevista.telaCaixa = telaCaixa;
@@ -52,7 +52,7 @@ namespace ClubeDaLeitura.Compartilhado
 
             telaAmigo.repositorioEmprestimo = repositorioEmprestimo;
 
-            telaMultas.repositorioEmprestimo = repositorioEmprestimo;
+            telaMulta.repositorioEmprestimo = repositorioEmprestimo;
 
             repositorioAmigo.repositorioEmprestimo = repositorioEmprestimo;
 
@@ -98,10 +98,10 @@ namespace ClubeDaLeitura.Compartilhado
                 return null;
         }
 
-        public TelaMultas EscolherMultas()
+        public TelaMulta EscolherMultas()
         {
             if (opcaoTelaEscolhida == 5)
-                return telaMultas;
+                return telaMulta;
             else
                 return null;
         }

@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloEmprestimo;
+using ClubeDaLeitura.ModuloMultas;
 
 namespace ClubeDaLeitura.ModuloAmigo
 {
@@ -7,6 +8,7 @@ namespace ClubeDaLeitura.ModuloAmigo
     {
         private RepositorioAmigo repositorioAmigo;
         public RepositorioEmprestimo repositorioEmprestimo;
+        public RepositorioMulta RepositorioMulta;
 
         public TelaAmigo(RepositorioAmigo repositorioAmigo) : base("Amigo", repositorioAmigo)
         {
@@ -26,6 +28,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.WriteLine("3 - Editar");
             Console.WriteLine("4 - Deletar");
             Console.WriteLine("5 - Visualizar Empréstimos");
+            Console.WriteLine("6 - Visualizar Multas");
             Console.WriteLine();
 
             return int.Parse(Console.ReadLine());
@@ -55,16 +58,42 @@ namespace ClubeDaLeitura.ModuloAmigo
             int idAmigo = ObterID();
 
             Console.WriteLine();
-            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
-                "ID", "Revista", "Data de Empréstimo", "Data de Devolução");
+            Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4, -15}",
+                "ID", "Revista", "Data de Empréstimo", "Data de Devolução", "Status");
 
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
             {
                 if (idAmigo == emprestimo.amigo.id)
-                    Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20}",
-                    emprestimo.id, emprestimo.revista.titulo, emprestimo.dataEmprestimo.ToShortDateString(), emprestimo.dataDevolucao.ToShortDateString());
+                    Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4, -15}",
+                    emprestimo.id, emprestimo.revista.titulo, emprestimo.dataEmprestimo.ToShortDateString(), 
+                    emprestimo.dataDevolucao.ToShortDateString(),
+                    emprestimo.status);
             }
+            Console.WriteLine("\nPressione ENTER para continuar...");
+            Console.ReadLine();
+        }
 
+        public void VisualizarMultas()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Multas do Amigo");
+            Console.WriteLine("------------------------");
+
+            int idAmigo = ObterID();
+
+            Console.WriteLine();
+            Console.WriteLine("{0,-8} | {1,-15} | {2,-18} | {3,-18} | {4,-10} | {5,-10} | {6,-10}",
+                "ID Multa", "ID Empréstimo", "Data de Empréstimo", "Data De Devolução", "Data Atual", "Valor", "Status");
+
+            foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
+            {
+                if (idAmigo == emprestimo.amigo.id && emprestimo.temMulta == true)
+                    Console.WriteLine("{0,-8} | {1,-15} | {2,-18} | {3,-18} | {4,-10} | {5,-10} | {6,-10}",
+                emprestimo.multa.id, emprestimo.multa.emprestimo.id, emprestimo.dataEmprestimo.ToShortDateString(),
+                emprestimo.dataDevolucao.ToShortDateString(), DateTime.Now.ToShortDateString(), 
+                $"R$ {emprestimo.multa.valor.ToString("F2")}", emprestimo.multa.status);
+            }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
         }

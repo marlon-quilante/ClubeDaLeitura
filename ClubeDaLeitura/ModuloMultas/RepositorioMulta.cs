@@ -2,5 +2,5 @@
 
 namespace ClubeDaLeitura.ModuloMultas
 {
-    public class RepositorioMultas : RepositorioBase;
+    public class RepositorioMulta : RepositorioBase;
 }

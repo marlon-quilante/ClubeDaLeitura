@@ -3,12 +3,12 @@ using ClubeDaLeitura.ModuloEmprestimo;
 
 namespace ClubeDaLeitura.ModuloMultas
 {
-    public class TelaMultas : TelaBase
+    public class TelaMulta : TelaBase
     {
-        private RepositorioMultas repositorioMultas;
+        private RepositorioMulta repositorioMultas;
         public RepositorioEmprestimo repositorioEmprestimo;
 
-        public TelaMultas(RepositorioMultas repositorioMultas) : base("Multa", repositorioMultas)
+        public TelaMulta(RepositorioMulta repositorioMultas) : base("Multa", repositorioMultas)
         {
             this.repositorioMultas = repositorioMultas;
         }
@@ -42,6 +42,7 @@ namespace ClubeDaLeitura.ModuloMultas
                     double valorMultas = (DateTime.Now.Subtract(emprestimo.dataDevolucao).Days) * 2.00;
                     Multa multa = new Multa(valorMultas, "Pendente", emprestimo);
                     emprestimo.temMulta = true;
+                    emprestimo.multa = multa;
                     repositorioMultas.CadastrarRegistro(multa);
 
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -79,11 +80,11 @@ namespace ClubeDaLeitura.ModuloMultas
 
         protected override void ApresentarLinhaTabela(EntidadeBase registro)
         {
-            Multa multas = (Multa)registro;
+            Multa multa = (Multa)registro;
 
             Console.WriteLine("{0,-8} | {1,-15} | {2,-18} | {3,-18} | {4,-10} | {5,-10} | {6,-10}",
-                multas.id, multas.emprestimo.id, multas.emprestimo.dataEmprestimo.ToShortDateString(), multas.emprestimo.dataDevolucao.ToShortDateString(),
-                DateTime.Now.ToShortDateString(), $"R$ {multas.valor.ToString("F2")}", multas.status);
+                multa.id, multa.emprestimo.id, multa.emprestimo.dataEmprestimo.ToShortDateString(), multa.emprestimo.dataDevolucao.ToShortDateString(),
+                DateTime.Now.ToShortDateString(), $"R$ {multa.valor.ToString("F2")}", multa.status);
         }
 
         protected override bool TemRestricao(EntidadeBase registro)
