@@ -4,10 +4,13 @@
     {
         public List<EntidadeBase> listaRegistros = new List<EntidadeBase>();
         public EntidadeBase entidadeBase;
+        private int idContador = 1;
 
         public void CadastrarRegistro(EntidadeBase registro)
         {
+            registro.id = idContador;
             listaRegistros.Add(registro);
+            idContador++;
         }
 
         public void AtualizarRegistro(int idParametro, EntidadeBase registroAtualizado)

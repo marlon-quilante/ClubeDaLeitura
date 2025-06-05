@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloAmigo;
+using ClubeDaLeitura.ModuloMultas;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloEmprestimo
@@ -9,9 +10,11 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         
         public Amigo amigo;
         public Revista revista;
+        public Multa multas;
         public DateTime dataEmprestimo;
         public DateTime dataDevolucao;
         public string status = "Aberto";
+        public bool temMulta = false;
 
         public Emprestimo(Amigo amigo, Revista revista, DateTime dataEmprestimo, DateTime dataDevolucao)
         {

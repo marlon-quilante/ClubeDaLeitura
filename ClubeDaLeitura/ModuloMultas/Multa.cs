@@ -3,13 +3,13 @@ using ClubeDaLeitura.ModuloEmprestimo;
 
 namespace ClubeDaLeitura.ModuloMultas
 {
-    public class Multas : EntidadeBase
+    public class Multa : EntidadeBase
     {
-        public int valor;
+        public double valor;
         public string status = "Pendente";
         public Emprestimo emprestimo;
 
-        public Multas(int valor, string status, Emprestimo emprestimo)
+        public Multa(double valor, string status, Emprestimo emprestimo)
         {
             this.valor = valor;
             this.status = status;

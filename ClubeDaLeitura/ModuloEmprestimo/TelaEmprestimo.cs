@@ -68,7 +68,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 
         public void RegistroDeEmprestimo()
         {
-            base.Cadastro();
+            base.Cadastrar();
         }
 
         protected override void ApresentarCabecalhoTabela()

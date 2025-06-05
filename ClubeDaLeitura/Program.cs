@@ -1,5 +1,9 @@
 ﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloAmigo;
+using ClubeDaLeitura.ModuloCaixa;
 using ClubeDaLeitura.ModuloEmprestimo;
+using ClubeDaLeitura.ModuloMultas;
+using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura
 {
@@ -9,14 +13,29 @@ namespace ClubeDaLeitura
         {
             TelaPrincipal telaPrincipal = new TelaPrincipal();
 
+            telaPrincipal.repositorioAmigo.CadastrarRegistro(new Amigo("João", "José", "(49) 9999-9999"));
+            telaPrincipal.repositorioCaixa.CadastrarRegistro(new Caixa("Caixa1", "Azul", 2));
+            telaPrincipal.repositorioRevista.CadastrarRegistro(new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)));
+            telaPrincipal.repositorioEmprestimo.CadastrarRegistro
+                (new Emprestimo(new Amigo("João", "José", "(49) 9999-9999"), 
+                new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)),
+                new DateTime(2025, 05, 04), new DateTime(2025, 05, 06)
+                ));
+            telaPrincipal.repositorioEmprestimo.CadastrarRegistro
+                (new Emprestimo(new Amigo("João", "José", "(49) 9999-9999"),
+                new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)),
+                new DateTime(2025, 05, 25), new DateTime(2025, 05, 27)
+                ));
+
             while (true)
             {
                 telaPrincipal.OpcaoDoMenu();
 
                 TelaBase telaEscolhida = telaPrincipal.EscolherTela();
                 TelaEmprestimo telaEmprestimo = telaPrincipal.EscolherEmprestimo();
+                TelaMultas telaMultas = telaPrincipal.EscolherMultas();
 
-                if (telaEscolhida == null && telaEmprestimo == null)
+                if (telaEscolhida == null && telaEmprestimo == null && telaMultas == null)
                     break;
 
                 if (telaEscolhida == telaPrincipal.telaAmigo)
@@ -34,6 +53,11 @@ namespace ClubeDaLeitura
                 {
                     ControleDeEmprestimos(telaPrincipal, telaEmprestimo);
                 }
+
+                else if (telaMultas == telaPrincipal.telaMultas)
+                {
+                    ControleDeMultas(telaPrincipal, telaMultas);
+                }
             }
         }
 
@@ -44,7 +68,7 @@ namespace ClubeDaLeitura
             switch (opcaoEscolhida)
             {
                 case 1:
-                    telaEscolhida.Cadastro();
+                    telaEscolhida.Cadastrar();
                     break;
                 case 2:
                     telaEscolhida.Visualizar();
@@ -70,7 +94,7 @@ namespace ClubeDaLeitura
             switch (opcaoEscolhida)
             {
                 case 1:
-                    telaEscolhida.Cadastro();
+                    telaEscolhida.Cadastrar();
                     break;
                 case 2:
                     telaEscolhida.Visualizar();
@@ -101,7 +125,25 @@ namespace ClubeDaLeitura
                 case 3:
                     telaEmprestimo.RegistroDeDevolucao();
                     break;
-                case 4:
+                default:
+                    break;
+            }
+        }
+
+        static void ControleDeMultas(TelaPrincipal telaPrincipal, TelaMultas telaMultas)
+        {
+            int opcaoEscolhida = telaMultas.OpcaoDoMenu();
+
+            switch (opcaoEscolhida)
+            {
+                case 1:
+                    telaMultas.GerarMulta();
+                    break;
+                case 2:
+                    telaMultas.Visualizar();
+                    break;
+                case 3:
+                    telaMultas.QuitarMulta();
                     break;
                 default:
                     break;

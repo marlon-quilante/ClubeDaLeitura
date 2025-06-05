@@ -3,7 +3,6 @@
     public abstract class TelaBase
     {
         protected string entidade;
-        private int idContador = 1;
         private RepositorioBase repositorioBase;
 
         public TelaBase(string entidade, RepositorioBase repositorio)
@@ -12,7 +11,7 @@
             this.repositorioBase = repositorio;
         }
 
-        public void Cadastro()
+        public void Cadastrar()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
@@ -20,7 +19,6 @@
             Console.WriteLine("------------------------");
 
             EntidadeBase novoRegistro = ObterDados();
-            novoRegistro.id = idContador;
             string erros = novoRegistro.Validacao(novoRegistro, repositorioBase);
             Console.WriteLine();
             if (erros != "")
@@ -30,11 +28,9 @@
                 Console.ResetColor();
                 Console.WriteLine("Pressione ENTER para tentar novamente...");
                 Console.ReadLine();
-                Cadastro();
+                Cadastrar();
                 return;
             }
-
-            idContador++;
             repositorioBase.CadastrarRegistro(novoRegistro);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Cadastro realizado com sucesso!");
@@ -101,11 +97,11 @@
 
         public abstract int OpcaoDoMenu();
 
-        public void Visualizar()
+        public virtual void Visualizar()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
-            Console.WriteLine($"{entidade} Cadastrados");
+            Console.WriteLine($"{entidade}s");
             Console.WriteLine("------------------------");
 
             Console.WriteLine();
@@ -116,9 +112,7 @@
             {
                 ApresentarLinhaTabela(registro);
             }
-
-            Console.WriteLine("\nPressione ENTER para continuar...");
-
+            Console.WriteLine("\nPressione ENTER para voltar...");
             Console.ReadLine();
         }
 
