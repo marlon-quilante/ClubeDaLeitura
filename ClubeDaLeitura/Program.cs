@@ -13,19 +13,19 @@ namespace ClubeDaLeitura
         {
             TelaPrincipal telaPrincipal = new TelaPrincipal();
 
-            telaPrincipal.repositorioAmigo.CadastrarRegistro(new Amigo("João", "José", "(49) 9999-9999"));
-            telaPrincipal.repositorioCaixa.CadastrarRegistro(new Caixa("Caixa1", "Azul", 2));
-            telaPrincipal.repositorioRevista.CadastrarRegistro(new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)));
-            telaPrincipal.repositorioEmprestimo.CadastrarRegistro
-                (new Emprestimo(new Amigo("João", "José", "(49) 9999-9999"), 
-                new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)),
-                new DateTime(2025, 05, 04), new DateTime(2025, 05, 06)
-                ));
-            telaPrincipal.repositorioEmprestimo.CadastrarRegistro
-                (new Emprestimo(new Amigo("João", "José", "(49) 9999-9999"),
-                new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)),
-                new DateTime(2025, 05, 25), new DateTime(2025, 05, 27)
-                ));
+            //telaPrincipal.repositorioAmigo.CadastrarRegistro(new Amigo("João", "José", "(49) 9999-9999"));
+            //telaPrincipal.repositorioCaixa.CadastrarRegistro(new Caixa("Caixa1", "Azul", 2));
+            //telaPrincipal.repositorioRevista.CadastrarRegistro(new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)));
+            //telaPrincipal.repositorioEmprestimo.CadastrarRegistro
+            //    (new Emprestimo(new Amigo("João", "José", "(49) 9999-9999"), 
+            //    new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)),
+            //    new DateTime(2025, 05, 04), new DateTime(2025, 05, 06)
+            //    ));
+            //telaPrincipal.repositorioEmprestimo.CadastrarRegistro
+            //    (new Emprestimo(new Amigo("João", "José", "(49) 9999-9999"),
+            //    new Revista("Revista1", 1234, new DateTime(2020, 1, 1), new Caixa("Caixa1", "Azul", 2)),
+            //    new DateTime(2025, 05, 25), new DateTime(2025, 05, 27)
+            //    ));
 
             while (true)
             {

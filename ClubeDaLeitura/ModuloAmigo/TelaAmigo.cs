@@ -47,7 +47,7 @@ namespace ClubeDaLeitura.ModuloAmigo
 
             return amigo;
         }
-       
+
         public void VisualizarEmprestimos()
         {
             Console.Clear();
@@ -64,10 +64,15 @@ namespace ClubeDaLeitura.ModuloAmigo
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
             {
                 if (idAmigo == emprestimo.amigo.id)
+                {
+                    if (emprestimo.EstaAtrasado())
+                        Console.ForegroundColor = ConsoleColor.Red;
+
                     Console.WriteLine("{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4, -15}",
-                    emprestimo.id, emprestimo.revista.titulo, emprestimo.dataEmprestimo.ToShortDateString(), 
-                    emprestimo.dataDevolucao.ToShortDateString(),
-                    emprestimo.status);
+                        emprestimo.id, emprestimo.revista.titulo, emprestimo.dataEmprestimo.ToShortDateString(),
+                        emprestimo.dataDevolucao.ToShortDateString(),
+                        emprestimo.status);
+                }
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
@@ -91,7 +96,7 @@ namespace ClubeDaLeitura.ModuloAmigo
                 if (idAmigo == emprestimo.amigo.id && emprestimo.temMulta == true)
                     Console.WriteLine("{0,-8} | {1,-15} | {2,-18} | {3,-18} | {4,-10} | {5,-10} | {6,-10}",
                 emprestimo.multa.id, emprestimo.multa.emprestimo.id, emprestimo.dataEmprestimo.ToShortDateString(),
-                emprestimo.dataDevolucao.ToShortDateString(), DateTime.Now.ToShortDateString(), 
+                emprestimo.dataDevolucao.ToShortDateString(), DateTime.Now.ToShortDateString(),
                 $"R$ {emprestimo.multa.valor.ToString("F2")}", emprestimo.multa.status);
             }
             Console.WriteLine("\nPressione ENTER para continuar...");

@@ -46,9 +46,16 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             if (repositorioAmigo.AmigoTemEmprestimoAtivo(idAmigo))
             {
                 Console.WriteLine();
-                Console.WriteLine("Este amigo já possui um empréstimo realizado! Pressione ENTER para tentar novamente...");
+                Console.WriteLine("Este amigo já possui um empréstimo aberto! Pressione ENTER para tentar novamente...");
                 Console.ReadLine();
+                return ObterDados();
+            }
+
+            if (repositorioAmigo.AmigoTemMultaPendente(idAmigo))
+            {
                 Console.WriteLine();
+                Console.WriteLine("Este amigo possui multa pendente! Pressione ENTER para tentar novamente...");
+                Console.ReadLine();
                 return ObterDados();
             }
 
