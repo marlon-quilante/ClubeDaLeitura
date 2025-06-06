@@ -42,28 +42,9 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         protected override Emprestimo ObterDados()
         {
             int idAmigo = telaAmigo.ObterID();
-
-            if (repositorioAmigo.AmigoTemEmprestimoAtivo(idAmigo))
-            {
-                Console.WriteLine();
-                Console.WriteLine("Este amigo já possui um empréstimo aberto! Pressione ENTER para tentar novamente...");
-                Console.ReadLine();
-                return ObterDados();
-            }
-
-            if (repositorioAmigo.AmigoTemMultaPendente(idAmigo))
-            {
-                Console.WriteLine();
-                Console.WriteLine("Este amigo possui multa pendente! Pressione ENTER para tentar novamente...");
-                Console.ReadLine();
-                return ObterDados();
-            }
-
             amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(idAmigo);
-
             int idRevista = telaRevista.ObterID();
             revista = (Revista)repositorioRevista.BuscarRegistroPorID(idRevista);
-
             Console.Write("Data de empréstimo: ");
             DateTime dataEmprestimo = DateTime.Parse(Console.ReadLine());
             DateTime dataDevolucao = dataEmprestimo.AddDays(revista.caixa.diasEmprestimo);
@@ -105,6 +86,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 
             Emprestimo emprestimo = (Emprestimo)repositorioEmprestimo.BuscarRegistroPorID(idEmprestimo);
             emprestimo.status = "Concluído";
+            emprestimo.revista.status = "Disponível";
         }        
 
         public int ObterID()

@@ -14,7 +14,6 @@ namespace ClubeDaLeitura.ModuloEmprestimo
         public DateTime dataEmprestimo;
         public DateTime dataDevolucao;
         public string status = "Aberto";
-        public bool temMulta = false;
 
         public Emprestimo(Amigo amigo, Revista revista, DateTime dataEmprestimo, DateTime dataDevolucao)
         {
@@ -22,11 +21,6 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             this.revista = revista;
             this.dataEmprestimo = dataEmprestimo;
             this.dataDevolucao = dataDevolucao;
-
-            if (dataEmprestimo > DateTime.Now)
-                revista.status = "Reservada";
-            else
-                revista.status = "Emprestada";
         }
 
         public override void Atualizar(EntidadeBase registroAtualizado)
@@ -44,12 +38,16 @@ namespace ClubeDaLeitura.ModuloEmprestimo
 
             if (amigo == null)
                 erros += "O amigo é obrigatório!\n";
-
             if (revista == null)
                 erros += "A revista é obrigatória!\n";
-
             if (dataEmprestimo == DateTime.MinValue)
-                erros += "A data do empréstimo é obrigatória!\n";                      
+                erros += "A data do empréstimo é obrigatória!\n";
+            if (amigo.temEmprestimoAtivo == true)
+                erros += "Este amigo possui um empréstimo em aberto!\n";
+            if (amigo.temMulta == true)
+                erros += "Este amigo possui multa pendente\n";
+            if (revista.status != "Disponível")
+                erros += "Esta revista não está disponível\n";
 
             return erros;
         }
@@ -61,7 +59,6 @@ namespace ClubeDaLeitura.ModuloEmprestimo
                 status = "Atrasado";
                 return true;
             }
-
             return false;
         }
     }

@@ -73,6 +73,7 @@ namespace ClubeDaLeitura.ModuloAmigo
                         emprestimo.dataDevolucao.ToShortDateString(),
                         emprestimo.status);
                 }
+                Console.ResetColor();
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
@@ -93,7 +94,7 @@ namespace ClubeDaLeitura.ModuloAmigo
 
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
             {
-                if (idAmigo == emprestimo.amigo.id && emprestimo.temMulta == true)
+                if (idAmigo == emprestimo.amigo.id && emprestimo.amigo.temMulta == true)
                     Console.WriteLine("{0,-8} | {1,-15} | {2,-18} | {3,-18} | {4,-10} | {5,-10} | {6,-10}",
                 emprestimo.multa.id, emprestimo.multa.emprestimo.id, emprestimo.dataEmprestimo.ToShortDateString(),
                 emprestimo.dataDevolucao.ToShortDateString(), DateTime.Now.ToShortDateString(),
@@ -107,7 +108,10 @@ namespace ClubeDaLeitura.ModuloAmigo
         {
             Amigo amigo = (Amigo)registro;
 
-            return repositorioAmigo.AmigoTemEmprestimoAtivo(amigo.id);
+            if (amigo.temEmprestimoAtivo == true)
+                return true;
+
+            return false;
         }
 
         protected override void ApresentarCabecalhoTabela()

@@ -6,7 +6,7 @@
         public EntidadeBase entidadeBase;
         private int idContador = 1;
 
-        public void CadastrarRegistro(EntidadeBase registro)
+        public virtual void CadastrarRegistro(EntidadeBase registro)
         {
             registro.id = idContador;
             listaRegistros.Add(registro);

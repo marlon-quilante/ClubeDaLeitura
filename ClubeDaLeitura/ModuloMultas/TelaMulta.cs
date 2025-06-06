@@ -37,11 +37,12 @@ namespace ClubeDaLeitura.ModuloMultas
 
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
             {
-                if (DateTime.Now > emprestimo.dataDevolucao && emprestimo.temMulta == false)
+                if (DateTime.Now > emprestimo.dataDevolucao && emprestimo.amigo.temMulta == false)
                 {
                     double valorMultas = (DateTime.Now.Subtract(emprestimo.dataDevolucao).Days) * 2.00;
                     Multa multa = new Multa(valorMultas, "Pendente", emprestimo);
-                    emprestimo.temMulta = true;
+                    emprestimo.amigo.temMulta = true;
+                    emprestimo.amigo.temMulta = true;
                     emprestimo.multa = multa;
                     repositorioMultas.CadastrarRegistro(multa);
 
@@ -65,7 +66,6 @@ namespace ClubeDaLeitura.ModuloMultas
             Multa multa = (Multa)repositorioMultas.BuscarRegistroPorID(idMulta);
 
             multa.status = "Quitada";
-            multa.emprestimo.temMulta = false;
             multa.emprestimo.amigo.temMulta = false;
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;

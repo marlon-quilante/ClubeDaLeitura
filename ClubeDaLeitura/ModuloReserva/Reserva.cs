@@ -1,8 +1,6 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloRevista;
-using Microsoft.Win32;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClubeDaLeitura.ModuloReserva
 {

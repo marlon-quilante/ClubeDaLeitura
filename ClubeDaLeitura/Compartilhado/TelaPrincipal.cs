@@ -66,8 +66,6 @@ namespace ClubeDaLeitura.Compartilhado
             telaReserva.telaAmigo = telaAmigo;
             telaReserva.telaRevista = telaRevista;
 
-            repositorioAmigo.repositorioEmprestimo = repositorioEmprestimo;
-
             repositorioCaixa.repositorioRevista = repositorioRevista;
         }
 
