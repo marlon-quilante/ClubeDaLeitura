@@ -23,7 +23,10 @@ namespace ClubeDaLeitura.ModuloAmigo
             {
                 if (idAmigo == emprestimo.amigo.id && emprestimo.temMulta == true)
                     if (emprestimo.multa.status == "Pendente")
+                    {
+                        emprestimo.amigo.temMulta = true;
                         return true;
+                    }
             }
             return false;
         }

@@ -1,6 +1,8 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloRevista;
+using Microsoft.Win32;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClubeDaLeitura.ModuloReserva
 {
@@ -30,7 +32,14 @@ namespace ClubeDaLeitura.ModuloReserva
 
         public override string Validacao(EntidadeBase registro, RepositorioBase repositorio)
         {
-            throw new NotImplementedException();
+            string erros = "";
+
+            if (amigo.temMulta == true)
+                erros += "Este amigo possui multa pendente!\n";
+            if (revista.status != "Disponível")
+                erros += "Esta revista não está disponível!\n";
+
+            return erros;
         }
     }
 }

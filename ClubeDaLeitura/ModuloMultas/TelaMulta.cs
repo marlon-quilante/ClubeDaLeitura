@@ -65,6 +65,8 @@ namespace ClubeDaLeitura.ModuloMultas
             Multa multa = (Multa)repositorioMultas.BuscarRegistroPorID(idMulta);
 
             multa.status = "Quitada";
+            multa.emprestimo.temMulta = false;
+            multa.emprestimo.amigo.temMulta = false;
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Multa quitada com sucesso!");

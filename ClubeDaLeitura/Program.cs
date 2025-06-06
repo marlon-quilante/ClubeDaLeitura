@@ -3,6 +3,7 @@ using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloCaixa;
 using ClubeDaLeitura.ModuloEmprestimo;
 using ClubeDaLeitura.ModuloMultas;
+using ClubeDaLeitura.ModuloReserva;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura
@@ -32,32 +33,23 @@ namespace ClubeDaLeitura
                 telaPrincipal.OpcaoDoMenu();
 
                 TelaBase telaEscolhida = telaPrincipal.EscolherTela();
-                TelaEmprestimo telaEmprestimo = telaPrincipal.EscolherEmprestimo();
-                TelaMulta telaMultas = telaPrincipal.EscolherMultas();
 
-                if (telaEscolhida == null && telaEmprestimo == null && telaMultas == null)
+                if (telaEscolhida == null)
                     break;
 
                 if (telaEscolhida == telaPrincipal.telaAmigo)
-                {
                     ControleDeAmigos(telaPrincipal, telaEscolhida);
-                }
 
-                if (telaEscolhida == telaPrincipal.telaCaixa 
-                    || telaEscolhida == telaPrincipal.telaRevista)
-                {
+                if (telaEscolhida == telaPrincipal.telaCaixa || telaEscolhida == telaPrincipal.telaRevista)
                     ControleGenerico(telaPrincipal, telaEscolhida);
-                }
 
-                else if (telaEmprestimo == telaPrincipal.telaEmprestimo)
-                {
-                    ControleDeEmprestimos(telaPrincipal, telaEmprestimo);
-                }
+                else if (telaEscolhida == telaPrincipal.telaEmprestimo)
+                    ControleDeEmprestimos(telaPrincipal, telaEscolhida);
 
-                else if (telaMultas == telaPrincipal.telaMulta)
-                {
-                    ControleDeMultas(telaPrincipal, telaMultas);
-                }
+                else if (telaEscolhida == telaPrincipal.telaMulta)
+                    ControleDeMultas(telaPrincipal, telaEscolhida);
+                else if (telaEscolhida == telaPrincipal.telaReserva)
+                    ControleDeReservas(telaPrincipal, telaEscolhida);
             }
         }
 
@@ -113,17 +105,19 @@ namespace ClubeDaLeitura
             }
         }
 
-        static void ControleDeEmprestimos(TelaPrincipal telaPrincipal, TelaEmprestimo telaEmprestimo)
+        static void ControleDeEmprestimos(TelaPrincipal telaPrincipal, TelaBase telaEscolhida)
         {
-            int opcaoEscolhida = telaEmprestimo.OpcaoDoMenu();
+            int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
+
+            TelaEmprestimo telaEmprestimo = (TelaEmprestimo)telaEscolhida;
 
             switch (opcaoEscolhida)
             {
                 case 1:
-                    telaEmprestimo.RegistroDeEmprestimo();
+                    telaEscolhida.Cadastrar();
                     break;
                 case 2:
-                    telaEmprestimo.Visualizar();
+                    telaEscolhida.Visualizar();
                     break;
                 case 3:
                     telaEmprestimo.RegistroDeDevolucao();
@@ -133,20 +127,45 @@ namespace ClubeDaLeitura
             }
         }
 
-        static void ControleDeMultas(TelaPrincipal telaPrincipal, TelaMulta telaMultas)
+        static void ControleDeMultas(TelaPrincipal telaPrincipal, TelaBase telaEscolhida)
         {
-            int opcaoEscolhida = telaMultas.OpcaoDoMenu();
+            int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
+
+            TelaMulta telaMulta = (TelaMulta)telaEscolhida;
 
             switch (opcaoEscolhida)
             {
                 case 1:
-                    telaMultas.GerarMulta();
+                    telaMulta.GerarMulta();
                     break;
                 case 2:
-                    telaMultas.Visualizar();
+                    telaEscolhida.Visualizar();
                     break;
                 case 3:
-                    telaMultas.QuitarMulta();
+                    telaMulta.QuitarMulta();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void ControleDeReservas(TelaPrincipal telaPrincipal, TelaBase telaEscolhida)
+        {
+            int opcaoEscolhida = telaEscolhida.OpcaoDoMenu();
+
+            TelaReserva telaReserva = (TelaReserva)telaEscolhida;
+
+            switch (opcaoEscolhida)
+            {
+                case 1:
+                    telaEscolhida.Cadastrar();
+                    break;
+                case 2:
+                    telaEscolhida.Visualizar();
+                    break;
+                case 3:
+                    break;
+                case 4:
                     break;
                 default:
                     break;

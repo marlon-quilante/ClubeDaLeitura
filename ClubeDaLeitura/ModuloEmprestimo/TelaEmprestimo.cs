@@ -73,11 +73,6 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             return emprestimo;
         }
 
-        public void RegistroDeEmprestimo()
-        {
-            base.Cadastrar();
-        }
-
         protected override void ApresentarCabecalhoTabela()
         {
             Console.WriteLine(formatoColunasTabela,

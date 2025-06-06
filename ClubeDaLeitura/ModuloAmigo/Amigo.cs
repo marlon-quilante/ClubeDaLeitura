@@ -7,6 +7,7 @@ namespace ClubeDaLeitura.ModuloAmigo
         public string nome;
         public string nomeResponsavel;
         public string telefone;
+        public bool temMulta = false;
 
         public Amigo(string nome, string nomeResponsavel, string telefone)
         {

@@ -2,6 +2,7 @@
 using ClubeDaLeitura.ModuloCaixa;
 using ClubeDaLeitura.ModuloEmprestimo;
 using ClubeDaLeitura.ModuloMultas;
+using ClubeDaLeitura.ModuloReserva;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.Compartilhado
@@ -25,6 +26,9 @@ namespace ClubeDaLeitura.Compartilhado
         public RepositorioMulta repositorioMultas;
         public TelaMulta telaMulta;
 
+        public RepositorioReserva repositorioReserva;
+        public TelaReserva telaReserva;
+
         public TelaPrincipal()
         {
             repositorioAmigo = new RepositorioAmigo();
@@ -42,6 +46,11 @@ namespace ClubeDaLeitura.Compartilhado
             repositorioMultas = new RepositorioMulta();
             telaMulta = new TelaMulta(repositorioMultas);
 
+            repositorioReserva = new RepositorioReserva();
+            telaReserva = new TelaReserva(repositorioReserva);
+
+            telaAmigo.repositorioEmprestimo = repositorioEmprestimo;
+
             telaRevista.repositorioCaixa = repositorioCaixa;
             telaRevista.telaCaixa = telaCaixa;
 
@@ -50,13 +59,16 @@ namespace ClubeDaLeitura.Compartilhado
             telaEmprestimo.repositorioRevista = repositorioRevista;
             telaEmprestimo.telaRevista = telaRevista;
 
-            telaAmigo.repositorioEmprestimo = repositorioEmprestimo;
-
             telaMulta.repositorioEmprestimo = repositorioEmprestimo;
+
+            telaReserva.repositorioAmigo = repositorioAmigo;
+            telaReserva.repositorioRevista = repositorioRevista;
+            telaReserva.telaAmigo = telaAmigo;
+            telaReserva.telaRevista = telaRevista;
 
             repositorioAmigo.repositorioEmprestimo = repositorioEmprestimo;
 
-            repositorioCaixa.repositorioRevista = repositorioRevista;  
+            repositorioCaixa.repositorioRevista = repositorioRevista;
         }
 
         public void OpcaoDoMenu()
@@ -72,7 +84,8 @@ namespace ClubeDaLeitura.Compartilhado
             Console.WriteLine("3 - Revistas");
             Console.WriteLine("4 - Empréstimos");
             Console.WriteLine("5 - Multas");
-            Console.WriteLine("6 - Sair");
+            Console.WriteLine("6 - Reservas");
+            Console.WriteLine("7 - Sair");
             Console.WriteLine();
 
             opcaoTelaEscolhida = int.Parse(Console.ReadLine());
@@ -86,22 +99,12 @@ namespace ClubeDaLeitura.Compartilhado
                 return telaCaixa;
             else if (opcaoTelaEscolhida == 3)
                 return telaRevista;
-            else
-                return null;
-        }
-
-        public TelaEmprestimo EscolherEmprestimo()
-        {
-            if (opcaoTelaEscolhida == 4)
+            else if (opcaoTelaEscolhida == 4)
                 return telaEmprestimo;
-            else
-                return null;
-        }
-
-        public TelaMulta EscolherMultas()
-        {
-            if (opcaoTelaEscolhida == 5)
+            else if (opcaoTelaEscolhida == 5)
                 return telaMulta;
+            else if (opcaoTelaEscolhida == 6)
+                return telaReserva;
             else
                 return null;
         }

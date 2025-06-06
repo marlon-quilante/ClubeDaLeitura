@@ -1,12 +1,21 @@
 ﻿using ClubeDaLeitura.Compartilhado;
-using ClubeDaLeitura.ModuloEmprestimo;
+using ClubeDaLeitura.ModuloAmigo;
+using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloReserva
 {
     public class TelaReserva : TelaBase
     {
         private RepositorioReserva repositorioReserva;
-        private string formatoColunasTabela = "{0,-5} | {1,-25} | {2,-25} | {3,-20} | {5,-10}";
+        private string formatoColunasTabela = "{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-10}";
+
+        public Amigo amigo;
+        public Revista revista;
+
+        public TelaAmigo telaAmigo;
+        public TelaRevista telaRevista;
+        public RepositorioAmigo repositorioAmigo;
+        public RepositorioRevista repositorioRevista;
 
         public TelaReserva(RepositorioReserva repositorioReserva) : base("Reserva", repositorioReserva)
         {
@@ -21,9 +30,9 @@ namespace ClubeDaLeitura.ModuloReserva
             Console.WriteLine("------------------------");
 
             Console.WriteLine("\nSelecione uma opção...\n");
-            Console.WriteLine("1 - Criar");
-            Console.WriteLine("2 - Cancelar");
-            Console.WriteLine("3 - Visualizar");
+            Console.WriteLine("1 - Cadastrar");
+            Console.WriteLine("2 - Visualizar");
+            Console.WriteLine("3 - Cancelar");
             Console.WriteLine("4 - Retirar Revista");
             Console.WriteLine();
 
@@ -47,7 +56,13 @@ namespace ClubeDaLeitura.ModuloReserva
 
         protected override EntidadeBase ObterDados()
         {
-            throw new NotImplementedException();
+            int idAmigo = telaAmigo.ObterID();
+            amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(idAmigo);
+            int idRevista = telaRevista.ObterID();
+            revista = (Revista)repositorioRevista.BuscarRegistroPorID(idRevista);
+            DateTime dataReserva = DateTime.Now;
+            Reserva reserva = new Reserva(amigo, revista, dataReserva);
+            return reserva;
         }
 
         protected override bool TemRestricao(EntidadeBase registro)
