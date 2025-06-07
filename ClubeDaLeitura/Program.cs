@@ -39,13 +39,10 @@ namespace ClubeDaLeitura
 
                 if (telaEscolhida == telaPrincipal.telaAmigo)
                     ControleDeAmigos(telaPrincipal, telaEscolhida);
-
                 if (telaEscolhida == telaPrincipal.telaCaixa || telaEscolhida == telaPrincipal.telaRevista)
                     ControleGenerico(telaPrincipal, telaEscolhida);
-
                 else if (telaEscolhida == telaPrincipal.telaEmprestimo)
                     ControleDeEmprestimos(telaPrincipal, telaEscolhida);
-
                 else if (telaEscolhida == telaPrincipal.telaMulta)
                     ControleDeMultas(telaPrincipal, telaEscolhida);
                 else if (telaEscolhida == telaPrincipal.telaReserva)
