@@ -24,6 +24,7 @@ namespace ClubeDaLeitura.ModuloMultas
             Console.WriteLine("1 - Gerar");
             Console.WriteLine("2 - Visualizar");
             Console.WriteLine("3 - Quitar");
+            Console.WriteLine("4 - Voltar");
             Console.WriteLine();
 
             return int.Parse(Console.ReadLine());

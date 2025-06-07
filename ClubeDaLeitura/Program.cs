@@ -77,6 +77,8 @@ namespace ClubeDaLeitura
                 case 6:
                     telaPrincipal.telaAmigo.VisualizarMultas();
                     break;
+                case 7:
+                    break;
                 default:
                     break;
             }
@@ -100,6 +102,8 @@ namespace ClubeDaLeitura
                 case 4:
                     telaEscolhida.Deletar();
                     break;
+                case 5:
+                    break;
                 default:
                     break;
             }
@@ -122,6 +126,8 @@ namespace ClubeDaLeitura
                 case 3:
                     telaEmprestimo.RegistrarDevolucao();
                     break;
+                case 4:
+                    break;
                 default:
                     break;
             }
@@ -143,6 +149,8 @@ namespace ClubeDaLeitura
                     break;
                 case 3:
                     telaMulta.QuitarMulta();
+                    break;
+                case 4:
                     break;
                 default:
                     break;
@@ -168,6 +176,8 @@ namespace ClubeDaLeitura
                     break;
                 case 4:
                     telaReserva.RetirarRevista();
+                    break;
+                case 5:
                     break;
                 default:
                     break;

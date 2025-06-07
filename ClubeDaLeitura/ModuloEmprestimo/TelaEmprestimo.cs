@@ -34,6 +34,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Console.WriteLine("1 - Registrar Empréstimo");
             Console.WriteLine("2 - Visualizar Empréstimos");
             Console.WriteLine("3 - Registrar Devolução");
+            Console.WriteLine("4 - Voltar");
             Console.WriteLine();
 
             return int.Parse(Console.ReadLine());

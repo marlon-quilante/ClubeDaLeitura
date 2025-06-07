@@ -29,6 +29,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.WriteLine("4 - Deletar");
             Console.WriteLine("5 - Visualizar Empréstimos");
             Console.WriteLine("6 - Visualizar Multas");
+            Console.WriteLine("7 - Voltar");
             Console.WriteLine();
 
             return int.Parse(Console.ReadLine());

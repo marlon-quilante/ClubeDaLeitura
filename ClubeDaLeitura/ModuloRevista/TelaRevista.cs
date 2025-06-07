@@ -26,6 +26,7 @@ namespace ClubeDaLeitura.ModuloRevista
             Console.WriteLine("2 - Visualizar");
             Console.WriteLine("3 - Editar");
             Console.WriteLine("4 - Deletar");
+            Console.WriteLine("5 - Voltar");
             Console.WriteLine();
 
             return int.Parse(Console.ReadLine());

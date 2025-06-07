@@ -37,6 +37,7 @@ namespace ClubeDaLeitura.ModuloReserva
             Console.WriteLine("2 - Visualizar");
             Console.WriteLine("3 - Cancelar");
             Console.WriteLine("4 - Retirar Revista");
+            Console.WriteLine("5 - Voltar");
             Console.WriteLine();
 
             return int.Parse(Console.ReadLine());
