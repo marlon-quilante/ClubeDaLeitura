@@ -1,13 +1,15 @@
 ﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloAmigo;
+using ClubeDaLeitura.ModuloEmprestimo;
 using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloReserva
 {
     public class TelaReserva : TelaBase
     {
-        private RepositorioReserva repositorioReserva;
         private string formatoColunasTabela = "{0,-5} | {1,-25} | {2,-25} | {3,-20} | {4,-10}";
+
+        private RepositorioReserva repositorioReserva;
 
         public Amigo amigo;
         public Revista revista;
@@ -16,6 +18,7 @@ namespace ClubeDaLeitura.ModuloReserva
         public TelaRevista telaRevista;
         public RepositorioAmigo repositorioAmigo;
         public RepositorioRevista repositorioRevista;
+        public RepositorioEmprestimo repositorioEmprestimo;
 
         public TelaReserva(RepositorioReserva repositorioReserva) : base("Reserva", repositorioReserva)
         {
@@ -65,6 +68,38 @@ namespace ClubeDaLeitura.ModuloReserva
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine();
                 Console.WriteLine("Cancelamento realizado com sucesso!");
+                Console.ReadLine();
+                Console.ResetColor();
+            }
+        }
+
+        public void RetirarRevista()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Retirada de Revista");
+            Console.WriteLine("------------------------");
+
+            int idReserva = ObterID();
+            Reserva reserva = (Reserva)repositorioReserva.BuscarRegistroPorID(idReserva);
+
+            if (reserva.status == "Cancelada" || reserva.status == "Concluída")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine();
+                Console.WriteLine("Essa reserva já foi cancelada ou concluída!");
+                Console.WriteLine();
+                Console.ResetColor();
+                Console.WriteLine("Pressione ENTER para voltar...");
+                Console.ReadLine();
+            }
+            else
+            {
+                Emprestimo emprestimo = repositorioReserva.GerarEmprestimo(reserva);
+                repositorioEmprestimo.CadastrarRegistro(emprestimo);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine();
+                Console.WriteLine("Revista retirada com sucesso!");
                 Console.ReadLine();
                 Console.ResetColor();
             }

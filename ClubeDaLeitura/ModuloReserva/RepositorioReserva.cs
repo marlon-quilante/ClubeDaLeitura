@@ -1,4 +1,7 @@
 ﻿using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloAmigo;
+using ClubeDaLeitura.ModuloEmprestimo;
+using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloReserva
 {
@@ -15,6 +18,15 @@ namespace ClubeDaLeitura.ModuloReserva
         {
             reserva.status = "Cancelada";
             reserva.revista.status = "Disponível";
+        }
+
+        public Emprestimo GerarEmprestimo(Reserva reserva)
+        {
+            DateTime dataDevolucao = DateTime.Now.AddDays(reserva.revista.caixa.diasEmprestimo);
+            Emprestimo emprestimo = new Emprestimo(reserva.amigo, reserva.revista, DateTime.Now, dataDevolucao);
+            reserva.status = "Concluída";
+
+            return emprestimo;
         }
     }
 }

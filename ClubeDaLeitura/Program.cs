@@ -167,6 +167,7 @@ namespace ClubeDaLeitura
                     telaReserva.Cancelar();
                     break;
                 case 4:
+                    telaReserva.RetirarRevista();
                     break;
                 default:
                     break;
