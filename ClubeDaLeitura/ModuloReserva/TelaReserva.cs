@@ -39,6 +39,37 @@ namespace ClubeDaLeitura.ModuloReserva
             return int.Parse(Console.ReadLine());
         }
 
+        public void Cancelar()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Cancelamento de Reserva");
+            Console.WriteLine("------------------------");
+
+            int idReserva = ObterID();
+            Reserva reserva = (Reserva)repositorioReserva.BuscarRegistroPorID(idReserva);
+            
+            if (reserva.status == "Cancelada" || reserva.status == "Concluída")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine();
+                Console.WriteLine("Essa reserva já foi cancelada ou concluída!");
+                Console.WriteLine();
+                Console.ResetColor();
+                Console.WriteLine("Pressione ENTER para voltar...");
+                Console.ReadLine();
+            }
+            else
+            {
+                repositorioReserva.CancelarReserva(reserva);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine();
+                Console.WriteLine("Cancelamento realizado com sucesso!");
+                Console.ReadLine();
+                Console.ResetColor();
+            }
+        }
+
         protected override void ApresentarCabecalhoTabela()
         {
             Console.WriteLine(formatoColunasTabela,
@@ -65,7 +96,7 @@ namespace ClubeDaLeitura.ModuloReserva
             return reserva;
         }
 
-        protected override bool TemRestricao(EntidadeBase registro)
+        protected override bool TemRestricaoDeExclusao(EntidadeBase registro)
         {
             throw new NotImplementedException();
         }

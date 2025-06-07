@@ -120,7 +120,7 @@ namespace ClubeDaLeitura
                     telaEscolhida.Visualizar();
                     break;
                 case 3:
-                    telaEmprestimo.RegistroDeDevolucao();
+                    telaEmprestimo.RegistrarDevolucao();
                     break;
                 default:
                     break;
@@ -164,6 +164,7 @@ namespace ClubeDaLeitura
                     telaEscolhida.Visualizar();
                     break;
                 case 3:
+                    telaReserva.Cancelar();
                     break;
                 case 4:
                     break;

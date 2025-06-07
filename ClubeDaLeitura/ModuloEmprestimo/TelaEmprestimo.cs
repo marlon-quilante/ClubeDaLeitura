@@ -75,7 +75,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Console.ResetColor();
         }        
 
-        public void RegistroDeDevolucao()
+        public void RegistrarDevolucao()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
@@ -83,10 +83,8 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Console.WriteLine("------------------------");
 
             int idEmprestimo = ObterID();
-
             Emprestimo emprestimo = (Emprestimo)repositorioEmprestimo.BuscarRegistroPorID(idEmprestimo);
-            emprestimo.status = "Concluído";
-            emprestimo.revista.status = "Disponível";
+            repositorioEmprestimo.RegistrarDevolucao(emprestimo);
         }        
 
         public int ObterID()
@@ -106,7 +104,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             }
         }
 
-        protected override bool TemRestricao(EntidadeBase registro)
+        protected override bool TemRestricaoDeExclusao(EntidadeBase registro)
         {
             return false;
         }

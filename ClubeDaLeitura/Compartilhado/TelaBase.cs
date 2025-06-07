@@ -131,7 +131,7 @@
 
             EntidadeBase registro = repositorioBase.BuscarRegistroPorID(id);
 
-            bool temRestricao = TemRestricao(registro);
+            bool temRestricao = TemRestricaoDeExclusao(registro);
 
             if (temRestricao)
             {
@@ -159,7 +159,7 @@
             }
         }
 
-        protected abstract bool TemRestricao(EntidadeBase registro);        
+        protected abstract bool TemRestricaoDeExclusao(EntidadeBase registro);        
 
         protected abstract EntidadeBase ObterDados();
     }

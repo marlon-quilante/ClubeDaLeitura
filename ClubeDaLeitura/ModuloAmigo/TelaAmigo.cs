@@ -104,7 +104,7 @@ namespace ClubeDaLeitura.ModuloAmigo
             Console.ReadLine();
         }
 
-        protected override bool TemRestricao(EntidadeBase registro)
+        protected override bool TemRestricaoDeExclusao(EntidadeBase registro)
         {
             Amigo amigo = (Amigo)registro;
 

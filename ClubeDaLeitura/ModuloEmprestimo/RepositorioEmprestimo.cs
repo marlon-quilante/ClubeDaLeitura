@@ -12,5 +12,11 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             emprestimo.amigo.temEmprestimoAtivo = true;
             emprestimo.revista.status = "Emprestada";
         }
+
+        public void RegistrarDevolucao(Emprestimo emprestimo)
+        {
+            emprestimo.status = "Concluído";
+            emprestimo.revista.status = "Disponível";
+        }
     }
 }

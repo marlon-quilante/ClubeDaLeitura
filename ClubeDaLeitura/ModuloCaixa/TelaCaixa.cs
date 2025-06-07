@@ -57,7 +57,7 @@ namespace ClubeDaLeitura.ModuloCaixa
                                 caixa.id, caixa.etiqueta, caixa.cor, caixa.diasEmprestimo);
         }
 
-        protected override bool TemRestricao(EntidadeBase registro)
+        protected override bool TemRestricaoDeExclusao(EntidadeBase registro)
         {
             Caixa caixa = (Caixa)registro;
 

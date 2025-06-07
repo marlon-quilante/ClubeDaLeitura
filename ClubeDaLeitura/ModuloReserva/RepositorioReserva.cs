@@ -10,5 +10,11 @@ namespace ClubeDaLeitura.ModuloReserva
             Reserva reserva = (Reserva)registro;
             reserva.revista.status = "Reservada";
         }
+
+        public void CancelarReserva(Reserva reserva)
+        {
+            reserva.status = "Cancelada";
+            reserva.revista.status = "Disponível";
+        }
     }
 }

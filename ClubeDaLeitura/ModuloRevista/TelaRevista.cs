@@ -48,7 +48,7 @@ namespace ClubeDaLeitura.ModuloRevista
             return revista;
         }
 
-        protected override bool TemRestricao(EntidadeBase registro)
+        protected override bool TemRestricaoDeExclusao(EntidadeBase registro)
         {
             return false;
         }

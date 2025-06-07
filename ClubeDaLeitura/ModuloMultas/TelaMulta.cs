@@ -5,12 +5,12 @@ namespace ClubeDaLeitura.ModuloMultas
 {
     public class TelaMulta : TelaBase
     {
-        private RepositorioMulta repositorioMultas;
+        private RepositorioMulta repositorioMulta;
         public RepositorioEmprestimo repositorioEmprestimo;
 
         public TelaMulta(RepositorioMulta repositorioMultas) : base("Multa", repositorioMultas)
         {
-            this.repositorioMultas = repositorioMultas;
+            this.repositorioMulta = repositorioMultas;
         }
 
         public override int OpcaoDoMenu()
@@ -41,14 +41,12 @@ namespace ClubeDaLeitura.ModuloMultas
                 {
                     double valorMultas = (DateTime.Now.Subtract(emprestimo.dataDevolucao).Days) * 2.00;
                     Multa multa = new Multa(valorMultas, "Pendente", emprestimo);
-                    emprestimo.amigo.temMulta = true;
-                    emprestimo.amigo.temMulta = true;
-                    emprestimo.multa = multa;
-                    repositorioMultas.CadastrarRegistro(multa);
-
+                    repositorioMulta.CadastrarRegistro(multa);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"ID do Empréstimo: {emprestimo.id}");
                     Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine("Pressione ENTER para voltar...");
                 }
             }
             Console.ReadLine();
@@ -63,15 +61,27 @@ namespace ClubeDaLeitura.ModuloMultas
             Console.WriteLine();
 
             int idMulta = ObterID();
-            Multa multa = (Multa)repositorioMultas.BuscarRegistroPorID(idMulta);
+            Multa multa = (Multa)repositorioMulta.BuscarRegistroPorID(idMulta);
 
-            multa.status = "Quitada";
-            multa.emprestimo.amigo.temMulta = false;
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Multa quitada com sucesso!");
-            Console.ReadLine();
-            Console.ResetColor();
+            if (multa.status == "Quitada")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine();
+                Console.WriteLine("Essa multa já foi quitada!");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine("Pressione ENTER para voltar...");
+                Console.ReadLine();
+            }
+            else
+            {
+                repositorioMulta.QuitarMulta(multa);
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Multa quitada com sucesso!");
+                Console.ReadLine();
+                Console.ResetColor();
+            }
         }
 
         protected override void ApresentarCabecalhoTabela()
@@ -89,7 +99,7 @@ namespace ClubeDaLeitura.ModuloMultas
                 DateTime.Now.ToShortDateString(), $"R$ {multa.valor.ToString("F2")}", multa.status);
         }
 
-        protected override bool TemRestricao(EntidadeBase registro)
+        protected override bool TemRestricaoDeExclusao(EntidadeBase registro)
         {
             return false;
         }
