@@ -33,7 +33,9 @@ namespace ClubeDaLeitura.ModuloMultas
         public void GerarMulta()
         {
             Console.Clear();
-            Console.WriteLine($"Empréstimos com multa gerada: ");
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"Geração de Multas");
+            Console.WriteLine("------------------------");
             Console.WriteLine();
 
             foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistros)
@@ -48,8 +50,15 @@ namespace ClubeDaLeitura.ModuloMultas
                     Console.ResetColor();
                     Console.WriteLine();
                     Console.WriteLine("Pressione ENTER para voltar...");
+                    Console.ReadLine();
+                    return;
                 }
             }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Não há nenhum empréstimo atrasado para a geração de multas!");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Pressione ENTER para voltar...");
             Console.ReadLine();
         }
 

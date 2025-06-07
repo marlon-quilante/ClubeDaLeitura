@@ -46,8 +46,7 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             amigo = (Amigo)repositorioAmigo.BuscarRegistroPorID(idAmigo);
             int idRevista = telaRevista.ObterID();
             revista = (Revista)repositorioRevista.BuscarRegistroPorID(idRevista);
-            Console.Write("Data de empréstimo: ");
-            DateTime dataEmprestimo = DateTime.Parse(Console.ReadLine());
+            DateTime dataEmprestimo = DateTime.Now;
             DateTime dataDevolucao = dataEmprestimo.AddDays(revista.caixa.diasEmprestimo);
 
             Emprestimo emprestimo = new Emprestimo(amigo, revista, dataEmprestimo, dataDevolucao);
@@ -82,28 +81,31 @@ namespace ClubeDaLeitura.ModuloEmprestimo
             Console.WriteLine("------------------------");
             Console.WriteLine($"Registro de Devolução");
             Console.WriteLine("------------------------");
+            Console.WriteLine();
 
             int idEmprestimo = ObterID();
             Emprestimo emprestimo = (Emprestimo)repositorioEmprestimo.BuscarRegistroPorID(idEmprestimo);
-            repositorioEmprestimo.RegistrarDevolucao(emprestimo);
-        }        
 
-        public int ObterID()
-        {
-            Console.Write($"IDEmpréstimo: ");
-            int id = int.Parse(Console.ReadLine());
-
-            if (repositorioEmprestimo.IDExiste(id))
-                return id;
+            if (emprestimo.status == "Concluído")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine();
+                Console.WriteLine("Esse empréstimo já está concluído!");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine("Pressione ENTER para voltar...");
+                Console.ReadLine();
+            }
             else
             {
+                repositorioEmprestimo.RegistrarDevolucao(emprestimo);
                 Console.WriteLine();
-                Console.Write("ID não localizado! Pressione ENTER para tentar novamente...");
-                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Devolução registrada com sucesso!");
                 Console.ReadLine();
-                return ObterID();
+                Console.ResetColor();
             }
-        }
+        }        
 
         protected override bool TemRestricaoDeExclusao(EntidadeBase registro)
         {

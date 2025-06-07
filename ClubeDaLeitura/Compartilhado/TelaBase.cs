@@ -8,7 +8,7 @@
         public TelaBase(string entidade, RepositorioBase repositorio)
         {
             this.entidade = entidade;
-            this.repositorioBase = repositorio;
+            repositorioBase = repositorio;
         }
 
         public void Cadastrar()
@@ -17,6 +17,7 @@
             Console.WriteLine("------------------------");
             Console.WriteLine($"Cadastro de {entidade}");
             Console.WriteLine("------------------------");
+            Console.WriteLine();
 
             EntidadeBase novoRegistro = ObterDados();
             string erros = novoRegistro.Validacao(novoRegistro, repositorioBase);
@@ -44,6 +45,7 @@
             Console.WriteLine("------------------------");
             Console.WriteLine($"Edição de {entidade}");
             Console.WriteLine("------------------------");
+            Console.WriteLine();
 
             int id = ObterID();
             Console.WriteLine();
@@ -78,54 +80,13 @@
             }
         }
 
-        public int ObterID()
-        {
-            Console.Write($"ID{entidade}: ");
-            int id = int.Parse(Console.ReadLine());
-
-            if (repositorioBase.IDExiste(id))
-                return id;
-            else
-            {
-                Console.WriteLine();
-                Console.Write("ID não localizado! Pressione ENTER para tentar novamente...");
-                Console.WriteLine();
-                Console.ReadLine();
-                return ObterID();
-            }
-        }
-
-        public abstract int OpcaoDoMenu();
-
-        public virtual void Visualizar()
-        {
-            Console.Clear();
-            Console.WriteLine("------------------------");
-            Console.WriteLine($"{entidade}s");
-            Console.WriteLine("------------------------");
-
-            Console.WriteLine();
-
-            ApresentarCabecalhoTabela();
-
-            foreach (EntidadeBase registro in repositorioBase.listaRegistros)
-            {
-                ApresentarLinhaTabela(registro);
-            }
-            Console.WriteLine("\nPressione ENTER para voltar...");
-            Console.ReadLine();
-        }
-
-        protected abstract void ApresentarLinhaTabela(EntidadeBase registro);
-
-        protected abstract void ApresentarCabecalhoTabela();
-
         public virtual void Deletar()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
             Console.WriteLine($"Exclusão de {entidade}");
             Console.WriteLine("------------------------");
+            Console.WriteLine();
 
             int id = ObterID();
 
@@ -158,6 +119,48 @@
                 return;
             }
         }
+
+        public virtual void Visualizar()
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------");
+            Console.WriteLine($"{entidade}s");
+            Console.WriteLine("------------------------");
+
+            Console.WriteLine();
+
+            ApresentarCabecalhoTabela();
+
+            foreach (EntidadeBase registro in repositorioBase.listaRegistros)
+            {
+                ApresentarLinhaTabela(registro);
+            }
+            Console.WriteLine("\nPressione ENTER para voltar...");
+            Console.ReadLine();
+        }
+
+        protected abstract void ApresentarLinhaTabela(EntidadeBase registro);
+
+        protected abstract void ApresentarCabecalhoTabela();
+
+        public int ObterID()
+        {
+            Console.Write($"ID{entidade}: ");
+            int id = int.Parse(Console.ReadLine());
+
+            if (repositorioBase.IDExiste(id))
+                return id;
+            else
+            {
+                Console.WriteLine();
+                Console.Write("ID não localizado! Pressione ENTER para tentar novamente...");
+                Console.WriteLine();
+                Console.ReadLine();
+                return ObterID();
+            }
+        }
+
+        public abstract int OpcaoDoMenu();
 
         protected abstract bool TemRestricaoDeExclusao(EntidadeBase registro);        
 

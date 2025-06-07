@@ -49,6 +49,7 @@ namespace ClubeDaLeitura.ModuloReserva
             Console.WriteLine("------------------------");
             Console.WriteLine($"Cancelamento de Reserva");
             Console.WriteLine("------------------------");
+            Console.WriteLine();
 
             int idReserva = ObterID();
             Reserva reserva = (Reserva)repositorioReserva.BuscarRegistroPorID(idReserva);
@@ -80,6 +81,7 @@ namespace ClubeDaLeitura.ModuloReserva
             Console.WriteLine("------------------------");
             Console.WriteLine($"Retirada de Revista");
             Console.WriteLine("------------------------");
+            Console.WriteLine();
 
             int idReserva = ObterID();
             Reserva reserva = (Reserva)repositorioReserva.BuscarRegistroPorID(idReserva);
