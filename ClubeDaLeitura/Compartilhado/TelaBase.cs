@@ -80,7 +80,7 @@
             }
         }
 
-        public virtual void Deletar()
+        public void Deletar()
         {
             Console.Clear();
             Console.WriteLine("------------------------");
@@ -120,7 +120,7 @@
             }
         }
 
-        public virtual void Visualizar()
+        public void Visualizar()
         {
             Console.Clear();
             Console.WriteLine("------------------------");

@@ -1,7 +1,5 @@
 ﻿using ClubeDaLeitura.Compartilhado;
-using ClubeDaLeitura.ModuloAmigo;
 using ClubeDaLeitura.ModuloEmprestimo;
-using ClubeDaLeitura.ModuloRevista;
 
 namespace ClubeDaLeitura.ModuloReserva
 {

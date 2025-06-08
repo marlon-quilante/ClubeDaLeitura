@@ -3,7 +3,6 @@
     public abstract class RepositorioBase
     {
         public List<EntidadeBase> listaRegistros = new List<EntidadeBase>();
-        public EntidadeBase entidadeBase;
         private int idContador = 1;
 
         public virtual void CadastrarRegistro(EntidadeBase registro)
